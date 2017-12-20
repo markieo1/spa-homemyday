@@ -1,0 +1,46 @@
+{
+  "name": "home-my-day",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "start.prod.aot": "node app.js",
+    "build": "ng build",
+    "build.prod": "ng build --prod",
+    "build.prod.aot": "ng build --aot --prod",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "serve.prod": "ng serve --prod",
+    "postinstall": "npm run build.prod.aot"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^5.0.0",
+    "@angular/cli": "1.6.1",
+    "@angular/common": "^5.0.0",
+    "@angular/compiler": "^5.0.0",
+    "@angular/compiler-cli": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@angular/http": "^5.0.0",
+    "@angular/platform-browser": "^5.0.0",
+    "@angular/platform-browser-dynamic": "^5.0.0",
+    "@angular/router": "^5.0.0",
+    "@types/jquery": "^3.2.17",
+    "bootstrap": "^3.3.7",
+    "bootstrap-sass": "^3.3.7",
+    "core-js": "^2.4.1",
+    "express": "^4.16.2",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "rxjs": "^5.5.2",
+    "tslint": "^5.8.0",
+    "typescript": "~2.4.2",
+    "zone.js": "^0.8.14"
+  },
+  "devDependencies": {
+    "@angular/language-service": "^5.0.0"
+  }
+}
