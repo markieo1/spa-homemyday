@@ -9,10 +9,10 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 
 [src/assets/*]
-indent_size = unset
-indent_style = unset
-insert_final_newline = unset
-trim_trailing_whitespace = unset
+indent_size = none
+indent_style = none
+insert_final_newline = none
+trim_trailing_whitespace = none
 
 [*.md]
 max_line_length = off
