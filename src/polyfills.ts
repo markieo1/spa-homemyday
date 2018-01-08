@@ -64,3 +64,19 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+import 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/forkJoin';
+
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/publishReplay';
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/share';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/pairwise';
+import 'rxjs/add/operator/exhaustMap';
+import 'rxjs/add/operator/startWith';
