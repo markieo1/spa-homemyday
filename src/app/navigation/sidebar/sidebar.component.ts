@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-navigation-sidebar',
-    templateUrl: 'sidebar.component.html'
+  selector: 'app-navigation-sidebar',
+  templateUrl: 'sidebar.component.html'
 })
 export class SidebarComponent {
 }
