@@ -19,11 +19,18 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "../node_modules/metismenu/dist/metisMenu.min.css",
+        "assets/css/sb-admin-2.min.css",
+        "../node_modules/morris.js/morris.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.slim.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/metismenu/dist/metisMenu.min.js",        
+        "../node_modules/morris.js/morris.min.js",
+        "../node_modules/raphael/raphael.min.js",
+        "assets/js/sb-admin-2.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
