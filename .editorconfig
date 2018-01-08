@@ -8,7 +8,7 @@ indent_size = 2
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[/assets/**]
+[src/assets/*]
 indent_size = unset
 indent_style = unset
 insert_final_newline = unset
