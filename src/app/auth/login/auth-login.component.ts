@@ -8,6 +8,7 @@ import { NgForm, FormGroup, NgModel } from '@angular/forms';
 })
 export class AuthLoginComponent implements OnInit {
 
+  public loading = false;
   constructor() {
 
   }
