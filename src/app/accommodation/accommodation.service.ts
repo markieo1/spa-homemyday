@@ -32,8 +32,9 @@ export class AccommodationService {
   *Add a new accomodation
   */
   public createAccomodation(accommodation: Accommodation): Observable<Accommodation> {
-    return this.http.post(`${environment}/accommodations`, accommodation)
-      .map(r => r.json());
+    return this.http.post(`${environment.apiUrl}/accommodations`, accommodation)
+      .map(r => r.json())
+      .map(r => new Accommodation(r));
   }
   /**
     * Deletes an accommodation of the id

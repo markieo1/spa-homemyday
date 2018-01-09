@@ -6,69 +6,69 @@
         <form [formGroup]="createAccommodationtForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="name">Name: </label>
-                <input label="Name" class="form-control" formControlName="name" type="text">
+                <input label="Name" class="form-control" formControlName="name" type="text" [(ngModel)]="accomodation.name">
             </div>
             <div class="form-group">
                 <label for="Description">Description:</label>
-                <textarea class="form-control" rows="5" formControlName="description"></textarea>
+                <textarea class="form-control" rows="5" formControlName="description" [(ngModel)]="accomodation.description"></textarea>
             </div>
             <div class="form-group">
                 <label for="maxPerson">Max Persons:</label>
-                <input type="number" class="form-control" formControlName="maxPersons">
+                <input type="number" class="form-control" formControlName="maxPersons" [(ngModel)]="accomodation.maxPersons">
             </div>
             <div class="form-group">
                 <label for="continent">Continent:</label>
-                <input type="text" class="form-control" formControlName="continent">
+                <input type="text" class="form-control" formControlName="continent" [(ngModel)]="accomodation.continent">
             </div>
             <div class="form-group">
                 <label for="country">Country:</label>
-                <input type="text" class="form-control" formControlName="country">
+                <input type="text" class="form-control" formControlName="country" [(ngModel)]="accomodation.country">
             </div>
             <div class="form-group">
                 <label for="location">Location:</label>
-                <input type="text" class="form-control" formControlName="location">
+                <input type="text" class="form-control" formControlName="location" [(ngModel)]="accomodation.location">
             </div>
             <div class="form-group">
                 <label for="latitude">Latitude:</label>
-                <input type="text" class="form-control" formControlName="latitude">
+                <input type="text" class="form-control" formControlName="latitude" [(ngModel)]="accomodation.latitude">
             </div>
             <div class="form-group">
-                <label for="longtitude">Longtitude:</label>
-                <input type="text" class="form-control" formControlName="longtitude">
+                <label for="longitude">Longitude:</label>
+                <input type="text" class="form-control" formControlName="longitude" [(ngModel)]="accomodation.longitude">
             </div>
             <div class="form-group">
                 <label for="rooms">Rooms:</label>
-                <input type="number" class="form-control" formControlName="rooms">
+                <input type="number" class="form-control" formControlName="rooms" [(ngModel)]="accomodation.rooms">
             </div>
             <div class="form-group">
                 <label for="beds">Beds:</label>
-                <input type="number" class="form-control" formControlName="beds">
+                <input type="number" class="form-control" formControlName="beds" [(ngModel)]="accomodation.beds">
             </div>
             <div class="form-group">
                 <label for="price">Price:</label>
-                <input type="text" class="form-control" formControlName="price">
+                <input type="text" class="form-control" formControlName="price" [(ngModel)]="accomodation.price">
             </div>
             <div class="form-group">
                 <label for="spaceText">Space:</label>
-                <textarea type="text" class="form-control" formControlName="spaceText"></textarea>
+                <textarea type="text" class="form-control" formControlName="spaceText" [(ngModel)]="accomodation.spaceText"></textarea>
             </div>
             <div class="form-group">
                 <label for="servicesText">Service:</label>
-                <textarea type="text" class="form-control" formControlName="servicesText"></textarea>
+                <textarea type="text" class="form-control" formControlName="servicesText" [(ngModel)]="accomodation.servicesText"></textarea>
             </div>
             <div class="form-group">
                 <label for="pricesText">Price Text:</label>
-                <textarea type="text" class="form-control" formControlName="pricesText"></textarea>
+                <textarea type="text" class="form-control" formControlName="pricesText" [(ngModel)]="accomodation.pricesText"></textarea>
             </div>
             <div class="form-group">
                 <label for="rulesText">Rules:</label>
-                <textarea type="text" class="form-control" formControlName="rulesText"></textarea>
+                <textarea type="text" class="form-control" formControlName="rulesText" [(ngModel)]="accomodation.rulesText"></textarea>
             </div>
             <div class="form-group">
                 <label for="cancellationText">Cancellation:</label>
-                <textarea type="text" class="form-control" formControlName="cancellationText"></textarea>
+                <textarea type="text" class="form-control" formControlName="cancellationText" [(ngModel)]="accomodation.cancellationText"></textarea>
             </div>
+            <button type="submit" class="btn btn-success" [disabled]="!buttonValid">Save</button>
         </form>
-        <button type="submit" class="btn btn-success" form="createAccommodationtForm" [disabled]="!createAccommodationtForm.valid">Save</button>
     </div>
 </div>
