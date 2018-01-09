@@ -10,7 +10,7 @@
     "build.prod": "ng build --prod",
     "build.prod.aot": "ng build --aot --prod",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "eclint check * && ng lint",
     "e2e": "ng e2e",
     "serve.prod": "ng serve --prod",
     "postinstall": "npm run build.prod.aot"
@@ -33,6 +33,7 @@
     "bootstrap-sass": "^3.3.7",
     "codelyzer": "^4.0.2",
     "core-js": "^2.4.1",
+    "eclint": "^2.5.0",
     "express": "^4.16.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
