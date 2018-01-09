@@ -10,6 +10,7 @@
             <th>#</th>
             <th>Name</th>
             <th class="text-right">Price</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -17,6 +18,7 @@
             <td>{{ (i + 1) }}</td>
             <td>{{ accommodation.name }}</td>
             <td class="text-right">{{ accommodation.price }}</td>
+            <td><input type="button" class="btn btn-block btn-warning" value="Delete" (click)="onAccommodationDeleteClick(accommodation._id)"></td>
           </tr>
         </tbody>
       </table>

@@ -23,4 +23,15 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
       this.accommodations = accommodations;
     });
   }
+
+  onAccommodationDeleteClick(id: string) {
+    this.accommodationService.delete(id)
+      .then((resp) => {
+        // display success delete
+        const index = this.accommodations.findIndex(x => x.)
+      })
+      .catch((error) => {
+        // display error on delete
+      });
+  }
 }

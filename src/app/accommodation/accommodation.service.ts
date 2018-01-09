@@ -18,4 +18,10 @@ export class AccommodationService {
     return this.http.get(`${environment.apiUrl}/accommodations`, HttpHelper.getRequestOptions())
       .map(r => r.json());
   }
+
+  public delete(id: string): Promise<Response> {
+    return this.http.delete(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
+      .map(r => r.json())
+      .toPromise();
+  }
 }
