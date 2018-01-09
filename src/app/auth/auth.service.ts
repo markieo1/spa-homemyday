@@ -12,7 +12,10 @@ export class AuthService {
 
   }
 
-  loggedIn() {
+  /**
+    * Checks if the user is logged in
+    */
+  isLoggedIn(): boolean {
     return tokenNotExpired();
   }
 
