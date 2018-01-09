@@ -6,6 +6,7 @@ import { AccommodationService } from './accommodation.service';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccommodationCreateComponent } from './accommodation-create/accommodation-create.component';
+import { AlertModule } from '../alert/alert.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AccommodationCreateComponent } from './accommodation-create/accommodati
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    AccommodationRoutingModule
+    AccommodationRoutingModule,
+    AlertModule
   ],
   providers: [
     AccommodationService

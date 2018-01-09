@@ -36,5 +36,12 @@ public onAddAccomodation: Subject<Accommodation>;
     .map(r => r.json())
     .map(r => new Accommodation(r));
   }
-
+  /**
+    * Deletes an accommodation of the id
+    * @param id The id of the accommodation
+    */
+  public delete(id: string) {
+    return this.http.delete(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
+      .map(r => r.json());
+  }
 }

@@ -41,6 +41,7 @@
     "morris.js": "^0.5.0",
     "raphael": "^2.2.7",
     "rxjs": "^5.5.2",
+    "sweetalert2": "^7.3.5",
     "tslint": "^5.8.0",
     "typescript": "~2.4.2",
     "zone.js": "^0.8.14"
