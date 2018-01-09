@@ -4,7 +4,7 @@ import { AccommodationOverviewComponent } from './accommodation-overview/accommo
 
 const routes: Routes = [
   {
-    path: 'accommodation',
+    path: 'accommodations',
     component: AccommodationOverviewComponent
   },
 ];
