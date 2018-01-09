@@ -6,17 +6,16 @@ import { AppComponent } from './app.component';
 import { NavigationModule } from './navigation/navigation.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AccommodationModule } from './accommodation/accommodation.module';
-import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './auth/auth-guard.service';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     NavigationModule,
+    AuthModule,
     AccommodationModule,
     HttpModule,
     NavigationModule,

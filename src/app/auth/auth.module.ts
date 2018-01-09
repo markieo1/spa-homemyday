@@ -1,16 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { AuthRoutingModule } from './auth-routing.module';
+import { AuthRegisterComponent } from './register/auth-register.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { AuthLoginComponent } from './login/auth-login.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
     tokenName: 'token',
-		tokenGetter: (() => sessionStorage.getItem('token')),
-		globalHeaders: [{'Content-Type':'application/json'}],
-	}), http, options);
+    tokenGetter: (() => sessionStorage.getItem('token')),
+    globalHeaders: [{ 'Content-Type': 'application/json' }],
+  }), http, options);
 }
 
 @NgModule({
+  declarations: [
+    AuthRegisterComponent,
+    AuthLoginComponent
+  ],
+  imports: [
+    BrowserModule,
+    AuthRoutingModule
+  ],
   providers: [
     {
       provide: AuthHttp,
@@ -19,4 +31,4 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     }
   ]
 })
-export class AuthModule {}
+export class AuthModule { }
