@@ -23,9 +23,9 @@ export class AccommodationService {
   }
 
   /**
-   * Deletes an accommodation of the id
-   * @param id The id of the accommodation
-   */
+    * Deletes an accommodation of the id
+    * @param id The id of the accommodation
+    */
   public delete(id: string) {
     return this.http.delete(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
       .map(r => r.json());
