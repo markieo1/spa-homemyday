@@ -5,6 +5,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthRegisterComponent } from './register/auth-register.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AuthLoginComponent } from './login/auth-login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -21,6 +22,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AuthRoutingModule
   ],
   providers: [
