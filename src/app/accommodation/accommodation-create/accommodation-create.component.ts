@@ -39,7 +39,7 @@ export class AccommodationCreateComponent extends BaseComponent implements OnIni
 
     this.accomodationService.createAccomodation(this.accomodation).subscribe((acco) => {
       this.alertService.showSuccess('Accommodation successfuly added.');
-      this.router.navigate(['/']);
+      this.router.navigate(['/accommodation']);
       console.log(acco);
     }, error => {
       console.log(error);
