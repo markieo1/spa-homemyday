@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterModel } from './registermodel.class';
 import { equalValidator } from '../../shared/validator/equal.validator';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-register',
@@ -25,7 +26,7 @@ export class AuthRegisterComponent extends BaseComponent {
     */
   public submitInProgress: boolean;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     super();
     this.registerModel = new RegisterModel();
 
@@ -46,7 +47,7 @@ export class AuthRegisterComponent extends BaseComponent {
     this.authService.register(this.registerModel.email, this.registerModel.password, this.registerModel.confirmPassword)
       .subscribe((registered) => {
         this.submitInProgress = false;
-
+        this.router.navigate(['/login']);
       }, error => {
         this.submitInProgress = false;
         console.error(error);
