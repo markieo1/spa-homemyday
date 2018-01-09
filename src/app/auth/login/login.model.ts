@@ -1,4 +1,4 @@
-export class User {
+export class Login {
     
     _id : string;
     username: string;
