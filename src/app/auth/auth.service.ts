@@ -22,7 +22,7 @@ export class AuthService {
     * @param password The password
     * @param confirmPassword The confirm password
     */
-  public register(email: string, password: string, confirmPassword: string) {
+  public register(email: string, password: string, confirmPassword: string): Observable<any> {
     if (!email || !password || !confirmPassword) {
       return Observable.throw(new Error('Invalid data supplied!'));
     }
