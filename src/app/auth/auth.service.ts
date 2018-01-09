@@ -44,11 +44,13 @@ export class AuthService {
 
 
     login(email: string, password: string) {
-        return this.http.post(`${environment.apiUrl}/login`, {email: email, password: password})
+        return this.http.post(`${environment.apiUrl}/authentication/login`, {
+            email: email, 
+            password: password
+        })
         .map(user => {
             if (user && this.user.token) {
-                console.log("test log in auth service");
-                localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem('token', this.user.token);
             } 
             return user;
         });
