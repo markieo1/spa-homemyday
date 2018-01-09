@@ -4,46 +4,49 @@ import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpHelper } from '../shared/helpers/http.helper';
-import { Login } from './login/login.model';
+import { User } from './login/login.model';
 
 @Injectable()
 export class AuthService {
 
-    private user: Login;
+    private user: User;
 
-  constructor(protected http: Http) {
+    constructor(protected http: Http) {
 
-  }
+    }
 
-  loggedIn() {
-    return tokenNotExpired();
-  }
-
-  /**
-    * Registers the user with the API
-    * @param email The email of the user
-    * @param password The password
-    * @param confirmPassword The confirm password
+    /**
+    * Checks if the user is logged in
     */
-    public register(email: string, password: string, confirmPassword: string) {
-        if (!email || !password || !confirmPassword) {
-        return Observable.throw(new Error('Invalid data supplied!'));
-        }
+    isLoggedIn(): boolean {
+        return tokenNotExpired();
+    }
 
+    /**
+        * Registers the user with the API
+        * @param email The email of the user
+        * @param password The password
+        * @param confirmPassword The confirm password
+    */
+    public register(email: string, password: string, confirmPassword: string): Observable<any> {
+        if (!email || !password || !confirmPassword) {
+          return Observable.throw(new Error('Invalid data supplied!'));
+        }
+    
         // Check if the passwords are equal
         if (password !== confirmPassword) {
-            return Observable.throw(new Error('Passwords do not match!'));
+          return Observable.throw(new Error('Passwords do not match!'));
         }
     
         return this.http.post(`${environment.apiUrl}/authentication/register`, {
-            email,
-            password
+          email,
+          password
         }, HttpHelper.getRequestOptions())
-            .map(r => r.json());
-    }
+          .map(r => r.status === 201);
+    }    
+    
 
-
-    login(email: string, password: string) {
+    public login(email: string, password: string) {
         return this.http.post(`${environment.apiUrl}/authentication/login`, {
             email: email, 
             password: password
@@ -58,6 +61,5 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem('token');
-    }    
+    }       
 }
-

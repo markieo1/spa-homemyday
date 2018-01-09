@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm, FormGroup, NgModel } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Login } from './login.model';
 import { BaseComponent } from '../../shared/base/basecomponent.class';
+import { User } from './login.model';
 
 @Component({
 	selector: 'app-auth-login',
@@ -11,7 +11,8 @@ import { BaseComponent } from '../../shared/base/basecomponent.class';
 })
 export class AuthLoginComponent extends BaseComponent implements OnInit {
 
-	private login: Login;
+	public loading = false;
+	private login: User;
 
 	@ViewChild('f')
 	private form: NgForm;
