@@ -25,6 +25,10 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
     });
   }
 
+  /**
+   * Deletes the clicked accommodation
+   * @param id The id of the accommodation
+   */
   onAccommodationDeleteClick(id: string) {
     this.alertService.showConfirm()
       .then((confirmed) => {

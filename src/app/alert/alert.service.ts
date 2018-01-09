@@ -30,7 +30,7 @@ export class AlertService {
     showSuccess(text: string) {
         return swal({
             title: 'Succesfull',
-            text: `${text}`,
+            text,
             type: 'success'
         });
     }
@@ -42,7 +42,7 @@ export class AlertService {
     showError(text: string) {
         return swal({
             title: 'Error',
-            text: `${text}`,
+            text,
             type: 'error'
         });
     }
