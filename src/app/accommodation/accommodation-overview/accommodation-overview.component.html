@@ -3,7 +3,7 @@
     <h1 class="page-header">
       Accommodations
     </h1>
-    <div class="table-responsive">
+    <div class="table-responsive" *ngIf="accommodations">
       <table class="table table-striped table-bordered table-hover">
         <thead>
           <tr>
@@ -18,6 +18,9 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div *ngIf="!accommodations">
+      No accommodations yet...
     </div>
   </div>
 </div>
