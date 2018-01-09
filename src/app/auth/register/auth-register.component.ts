@@ -45,7 +45,7 @@ export class AuthRegisterComponent extends BaseComponent {
 
     this.submitInProgress = true;
 
-    this.authService.register(this.registerModel.email, this.registerModel.password, this.registerModel.confirmPassword)
+    this.subscription = this.authService.register(this.registerModel.email, this.registerModel.password, this.registerModel.confirmPassword)
       .subscribe((registered) => {
         this.submitInProgress = false;
         this.alertService.showSuccess('Successfully registered.');
