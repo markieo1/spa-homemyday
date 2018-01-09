@@ -59,7 +59,7 @@ export class AccommodationCreateComponent extends BaseComponent implements OnIni
       'longitude': new FormControl(''),
       'rooms': new FormControl(0),
       'beds': new FormControl(0),
-      'price': new FormControl('0'),
+      'price': new FormControl('0', Validators.required),
       'spaceText': new FormControl(''),
       'servicesText': new FormControl(''),
       'pricesText': new FormControl(''),
