@@ -9,8 +9,8 @@ import { AccommodationService } from '../accommodation.service';
 })
 export class AccommodationOverviewComponent extends BaseComponent implements OnInit {
   /**
-   * The accommodations to display
-   */
+    * The accommodations to display
+    */
   public accommodations: Accommodation[];
 
   constructor(private accommodationService: AccommodationService) {

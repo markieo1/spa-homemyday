@@ -12,8 +12,8 @@ export class AccommodationService {
   }
 
   /**
-   * Gets all the accommodations
-   */
+    * Gets all the accommodations
+    */
   public getAll(): Observable<Accommodation[]> {
     return this.http.get(`${environment.apiUrl}/accommodations`, HttpHelper.getRequestOptions())
       .map(r => r.json());

@@ -3,15 +3,15 @@ import { Subscription } from 'rxjs/Subscription';
 
 export class BaseComponent implements OnDestroy {
   /**
-   * Adds a subscription to the array of all the subscriptions
-   */
+    * Adds a subscription to the array of all the subscriptions
+    */
   public set subscription(subscription: Subscription) {
     this.subscriptions.push(subscription);
   }
 
   /**
-   * All the subscriptions
-   */
+    * All the subscriptions
+    */
   private subscriptions: Subscription[];
 
   constructor() {
