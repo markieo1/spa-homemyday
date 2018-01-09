@@ -36,6 +36,6 @@ export class AuthService {
       email,
       password
     }, HttpHelper.getRequestOptions())
-      .map(r => r.json());
+      .map(r => r.status === 201);
   }
 }
