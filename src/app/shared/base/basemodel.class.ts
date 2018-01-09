@@ -2,7 +2,7 @@ export abstract class BaseModel {
   /**
     * The id
     */
-  public id: string;
+  public id?: string;
 
   constructor(json?: any) {
     this.loadJson(json);
