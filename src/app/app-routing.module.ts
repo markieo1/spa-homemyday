@@ -5,7 +5,8 @@ import { AuthGuard } from './auth/auth-guard.service';
 const routes: Routes = [
   {
     path: '**',
-    redirectTo: '/dashboard',
+    // TODO: Change back to dashboard
+    redirectTo: '/accommodations',
     canActivate: [AuthGuard]
   }
 ];
