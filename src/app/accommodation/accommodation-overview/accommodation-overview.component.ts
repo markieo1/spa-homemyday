@@ -33,15 +33,15 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
     this.alertService.showConfirm()
       .then((confirmed) => {
         if (confirmed) {
-          this.accommodationService.delete(id)
-          .subscribe((resp) => {
-            const index = this.accommodations.findIndex(x => x.id === id);
-            this.accommodations.splice(index, 1);
-            this.alertService.showSuccess('Succesfully removed accommodation');
-          }, (error) => {
-            this.alertService.showError('Error occurred while removing accommodation');
-          });
+          this.subscription = this.accommodationService.delete(id)
+            .subscribe((resp) => {
+              const index = this.accommodations.findIndex(x => x.id === id);
+              this.accommodations.splice(index, 1);
+              this.alertService.showSuccess('Succesfully removed accommodation');
+            }, (error) => {
+              this.alertService.showError('Error occurred while removing accommodation');
+            });
         }
-    });
+      });
   }
 }
