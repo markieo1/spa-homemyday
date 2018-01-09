@@ -1,5 +1,5 @@
 <div id="wrapper">
-  <app-navigation></app-navigation>
+  <app-navigation *ngIf="auth.loggedIn()"></app-navigation>
   <div id="page-wrapper">
     <router-outlet></router-outlet>
   </div>
