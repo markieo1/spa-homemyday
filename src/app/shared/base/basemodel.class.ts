@@ -29,7 +29,6 @@ export abstract class BaseModel {
       } else if (this[prop] instanceof Date) {
         this[prop] = new Date(json[prop]);
       } else {
-        // NOTE: Deserialize the 'default' array's later then array's of specific models!
         this[prop] = json[prop];
       }
     }
