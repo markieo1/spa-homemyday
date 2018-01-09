@@ -3,7 +3,10 @@ import swal from 'sweetalert2';
 
 @Injectable()
 export class AlertService {
-    confirmAlert() {
+    /**
+     * Displays a confirmation message to the user
+     */
+    showConfirm() {
         return swal({
             title: 'Are you sure?',
             text: 'You will not be able to undo this action!',
@@ -20,17 +23,25 @@ export class AlertService {
         });
     }
 
-    showSuccessAlert(title: string, text: string) {
+    /**
+     * Displays a succesfull message to the user
+     * @param text The text of the success message
+     */
+    showSuccess(text: string) {
         return swal({
-            title: `${title}`,
+            title: 'Succesfull',
             text: `${text}`,
             type: 'success'
         });
     }
 
-    showErrorAlert(title: string, text: string) {
+    /**
+     * Displays a failed message to the user
+     * @param text The text of the error message
+     */
+    showError(text: string) {
         return swal({
-            title: `${title}`,
+            title: 'Error',
             text: `${text}`,
             type: 'error'
         });

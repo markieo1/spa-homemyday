@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Accommodation } from '../accommodation.class';
 import { BaseComponent } from '../../shared/base/basecomponent.class';
 import { AccommodationService } from '../accommodation.service';
-import { AlertService } from '../../shared/services/alert.service';
+import { AlertService } from '../../alert/alert.service';
 
 @Component({
   selector: 'app-accommodation-overview',
@@ -26,16 +26,16 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
   }
 
   onAccommodationDeleteClick(id: string) {
-    this.alertService.confirmAlert()
+    this.alertService.showConfirm()
       .then((confirmed) => {
         if (confirmed) {
           this.accommodationService.delete(id)
           .subscribe((resp) => {
             const index = this.accommodations.findIndex(x => x.id === id);
             this.accommodations.splice(index, 1);
-            this.alertService.showSuccessAlert('Succesfull', 'Succesfully removed accommodation');
+            this.alertService.showSuccess('Succesfully removed accommodation');
           }, (error) => {
-            this.alertService.showErrorAlert('Error', 'Error occurred while removing accommodation');
+            this.alertService.showError('Error occurred while removing accommodation');
           });
         }
     });

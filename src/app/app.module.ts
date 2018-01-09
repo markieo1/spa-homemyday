@@ -5,8 +5,7 @@ import { AppComponent } from './app.component';
 import { NavigationModule } from './navigation/navigation.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AccommodationModule } from './accommodation/accommodation.module';
-
-import { AlertService } from './shared/services/alert.service';
+import { AlertModule } from './alert/alert.module';
 
 @NgModule({
   declarations: [
@@ -16,11 +15,10 @@ import { AlertService } from './shared/services/alert.service';
     BrowserModule,
     NavigationModule,
     AccommodationModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AlertModule
   ],
-  providers: [
-    AlertService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
