@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm, FormGroup, NgModel } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { BaseComponent } from '../../shared/base/basecomponent.class';
-import { User } from './login.model';
+import { LoginModel } from './login.model';
+import { AlertService } from '../../alert/alert.service';
 
 @Component({
 	selector: 'app-auth-login',
@@ -12,13 +13,15 @@ import { User } from './login.model';
 export class AuthLoginComponent extends BaseComponent implements OnInit {
 
 	public loading = false;
-	private login: User;
+	public loginModel: LoginModel;
+	public submitInProgress: boolean;
 
 	@ViewChild('f')
 	private form: NgForm;
 
-	constructor(private authService: AuthService) {
+	constructor(private alertService: AlertService, private authService: AuthService, private router: Router) {
 		super();
+		this.loginModel = new LoginModel();
 	}
 
 	ngOnInit() {
@@ -27,6 +30,15 @@ export class AuthLoginComponent extends BaseComponent implements OnInit {
 
 	onSubmit(form: NgForm) {
 		const { email, password } = form.value;
-		this.authService.login(this.login.email, this.login.password);
+		this.subscription = this.authService.login(this.loginModel.email, this.loginModel.password)		
+		.subscribe((loggedin) => {
+			this.submitInProgress = false;
+			this.alertService.showSuccess('Successfully logged in.');
+			this.router.navigateByUrl('/dashboard');
+		  }, error => {
+			console.error(error);
+			this.submitInProgress = false;
+			this.alertService.showError('An error has occurred while trying to login.');
+		  });
 	}
 }

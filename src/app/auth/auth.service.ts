@@ -4,12 +4,12 @@ import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpHelper } from '../shared/helpers/http.helper';
-import { User } from './login/login.model';
+import { LoginModel } from './login/login.model';
 
 @Injectable()
 export class AuthService {
 
-    private user: User;
+    private user: LoginModel;
 
     constructor(protected http: Http) {
 
@@ -46,16 +46,20 @@ export class AuthService {
     }    
     
 
-    public login(email: string, password: string) {
+    public login(email: string, password: string): Observable<boolean> {
         return this.http.post(`${environment.apiUrl}/authentication/login`, {
             email: email, 
             password: password
         })
-        .map(user => {
-            if (user && this.user.token) {
-                localStorage.setItem('token', this.user.token);
+        .map(response => {
+            const responseToken = response.json().token;
+			if (responseToken) {
+                localStorage.setItem('token', responseToken);
+				return true;
             } 
-            return user;
+            else {
+                return false;
+            }
         });
     }
 

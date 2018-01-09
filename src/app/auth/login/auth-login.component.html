@@ -9,10 +9,10 @@
                         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" ngModel required>
+                                    <input class="form-control" placeholder="E-mail" name="email" type="email" [(ngModel)]="loginModel.email" required>
                                 </div>
                                 <div class="form-group" >
-                                    <input class="form-control" placeholder="Password" name="password" type="password" ngModel required>
+                                    <input class="form-control" placeholder="Password" name="password" type="password" [(ngModel)]="loginModel.password" required>
                                 </div>
                                 <div class="form-group">
                                     <button [disabled]="loading" class="btn btn-primary  btn-block">Login</button>
