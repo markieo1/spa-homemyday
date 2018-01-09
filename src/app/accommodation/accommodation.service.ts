@@ -22,9 +22,8 @@ export class AccommodationService {
       .toArray();
   }
 
-  public delete(id: string): Promise<Response> {
+  public delete(id: string) {
     return this.http.delete(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
-      .map(r => r.json())
-      .toPromise();
+      .map(r => r.json());
   }
 }

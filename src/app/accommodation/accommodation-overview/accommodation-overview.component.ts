@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Accommodation } from '../accommodation.class';
 import { BaseComponent } from '../../shared/base/basecomponent.class';
 import { AccommodationService } from '../accommodation.service';
+import { AlertService } from '../../shared/services/alert.service';
 
 @Component({
   selector: 'app-accommodation-overview',
@@ -13,7 +14,7 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
     */
   public accommodations: Accommodation[];
 
-  constructor(private accommodationService: AccommodationService) {
+  constructor(private accommodationService: AccommodationService, private alertService: AlertService) {
     super();
   }
 
@@ -25,13 +26,18 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
   }
 
   onAccommodationDeleteClick(id: string) {
-    this.accommodationService.delete(id)
-      .then((resp) => {
-        // display success delete
-        const index = this.accommodations.findIndex(x => x.)
-      })
-      .catch((error) => {
-        // display error on delete
-      });
+    this.alertService.confirmAlert()
+      .then((confirmed) => {
+        if (confirmed) {
+          this.accommodationService.delete(id)
+          .subscribe((resp) => {
+            const index = this.accommodations.findIndex(x => x.id === id);
+            this.accommodations.splice(index, 1);
+            this.alertService.showSuccessAlert('Succesfull', 'Succesfully removed accommodation');
+          }, (error) => {
+            this.alertService.showErrorAlert('Error', 'Error occurred while removing accommodation');
+          });
+        }
+    });
   }
 }
