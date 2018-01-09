@@ -1,6 +1,9 @@
-<div id="wrapper">
+<div id="wrapper" *ngIf="true; else notLoggedIn">
   <app-navigation></app-navigation>
   <div id="page-wrapper">
     <router-outlet></router-outlet>
   </div>
 </div>
+<ng-template #notLoggedIn>
+  <router-outlet></router-outlet>
+</ng-template>
