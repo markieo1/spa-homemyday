@@ -38,9 +38,9 @@ export class AccommodationCreateComponent extends BaseComponent implements OnIni
     }
 
     this.accomodationService.createAccomodation(this.accomodation).subscribe((acco) => {
-      this.alertService.showSuccess('Accommodation successfuly added.');
-      this.router.navigate(['/accommodations']);
-      console.log(acco);
+      this.alertService.showSuccess('Accommodation successfuly added.').then(() => {
+        this.router.navigate(['/accommodations']);
+      });
     }, error => {
       console.log(error);
       this.alertService.showError('An error has occurred while creating a new accommodation.');
