@@ -16,7 +16,10 @@ export class AccommodationService {
     */
   public getAll(): Observable<Accommodation[]> {
     return this.http.get(`${environment.apiUrl}/accommodations`, HttpHelper.getRequestOptions())
-      .map(r => r.json());
+      .map(r => r.json())
+      .flatMap(r => r)
+      .map(r => new Accommodation(r))
+      .toArray();
   }
 
   public delete(id: string): Promise<Response> {

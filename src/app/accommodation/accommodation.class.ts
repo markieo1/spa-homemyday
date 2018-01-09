@@ -1,4 +1,6 @@
-export class Accommodation {
+import { BaseModel } from '../shared/base/basemodel.class';
+
+export class Accommodation extends BaseModel {
   name: string;
   description: string;
   maxPersons: number;
@@ -16,4 +18,8 @@ export class Accommodation {
   pricesText: string;
   rulesText: string;
   cancellationText: string;
+
+  constructor(json?: any) {
+    super(json);
+  }
 }
