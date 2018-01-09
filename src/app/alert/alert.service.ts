@@ -4,8 +4,8 @@ import swal from 'sweetalert2';
 @Injectable()
 export class AlertService {
     /**
-     * Displays a confirmation message to the user
-     */
+      * Displays a confirmation message to the user
+      */
     showConfirm() {
         return swal({
             title: 'Are you sure?',
@@ -24,9 +24,9 @@ export class AlertService {
     }
 
     /**
-     * Displays a succesfull message to the user
-     * @param text The text of the success message
-     */
+      * Displays a succesfull message to the user
+      * @param text The text of the success message
+      */
     showSuccess(text: string) {
         return swal({
             title: 'Succesfull',
@@ -36,9 +36,9 @@ export class AlertService {
     }
 
     /**
-     * Displays a failed message to the user
-     * @param text The text of the error message
-     */
+      * Displays a failed message to the user
+      * @param text The text of the error message
+      */
     showError(text: string) {
         return swal({
             title: 'Error',
