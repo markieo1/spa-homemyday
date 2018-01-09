@@ -10,7 +10,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class AccommodationService {
 
-public onAddAccomodation: Subject<Accommodation>;
+  public onAddAccomodation: Subject<Accommodation>;
 
   // TODO: Replace HTTP with AuthHttp
   constructor(protected http: Http) {
@@ -33,8 +33,7 @@ public onAddAccomodation: Subject<Accommodation>;
   */
   public createAccomodation(accommodation: Accommodation): Observable<Accommodation> {
     return this.http.post(`${environment}/accommodations`, accommodation)
-    .map(r => r.json())
-    .map(r => new Accommodation(r));
+      .map(r => r.json());
   }
   /**
     * Deletes an accommodation of the id

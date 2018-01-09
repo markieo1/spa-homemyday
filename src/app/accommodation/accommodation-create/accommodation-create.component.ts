@@ -22,6 +22,7 @@ export class AccommodationCreateComponent extends BaseComponent implements OnIni
   }
 
   public onSubmit() {
+
   }
 
   private initForm() {
