@@ -21,6 +21,7 @@ export class AuthService {
         return tokenNotExpired();
     }
 
+    loggedIn(): Observable<boolean> {
         if(this.isLoggedIn) {
             return Observable.of(true);
         }
