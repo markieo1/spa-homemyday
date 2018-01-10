@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccommodationCreateComponent } from './accommodation-create/accommodation-create.component';
 import { AlertModule } from '../alert/alert.module';
+import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -15,10 +16,9 @@ import { AlertModule } from '../alert/alert.module';
   ],
   imports: [
     BrowserModule,
-    // TODO: Change in auth http
-    HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    AuthModule,
     AccommodationRoutingModule,
     AlertModule
   ],
