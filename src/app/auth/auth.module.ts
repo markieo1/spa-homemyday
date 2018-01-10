@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { AlertModule } from '../alert/alert.module';
 import { AuthGuard } from './auth-guard.service';
-import { HttpHelper } from '../shared/helpers/http.helper';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
