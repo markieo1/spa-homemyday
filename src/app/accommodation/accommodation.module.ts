@@ -5,6 +5,7 @@ import { AccommodationRoutingModule } from './accommodation-routing.module';
 import { AccommodationService } from './accommodation.service';
 import { HttpModule } from '@angular/http';
 import { AlertModule } from '../alert/alert.module';
+import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -12,8 +13,7 @@ import { AlertModule } from '../alert/alert.module';
   ],
   imports: [
     BrowserModule,
-    // TODO: Change in auth http
-    HttpModule,
+    AuthModule,
     AccommodationRoutingModule,
     AlertModule
   ],
