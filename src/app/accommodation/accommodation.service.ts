@@ -8,8 +8,8 @@ import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class AccommodationService {
-  constructor(protected authHttp: AuthHttp) {
-  }
+
+  constructor(protected authHttp: AuthHttp) {}
 
   /**
     * Gets all the accommodations
@@ -20,6 +20,11 @@ export class AccommodationService {
       .flatMap(r => r)
       .map(r => new Accommodation(r))
       .toArray();
+  }
+
+  public getAccommodation(id: string): Observable<Accommodation> {
+    return this.authHttp.get(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
+      .map(r => new Accommodation(r));
   }
 
   /**

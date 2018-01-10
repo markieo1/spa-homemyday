@@ -6,10 +6,12 @@ import { AccommodationService } from './accommodation.service';
 import { HttpModule } from '@angular/http';
 import { AlertModule } from '../alert/alert.module';
 import { AuthModule } from '../auth/auth.module';
+import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
 
 @NgModule({
   declarations: [
-    AccommodationOverviewComponent
+    AccommodationOverviewComponent,
+    AccommodationDetailComponent
   ],
   imports: [
     BrowserModule,
