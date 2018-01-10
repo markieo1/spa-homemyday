@@ -4,16 +4,21 @@ import { AccommodationOverviewComponent } from './accommodation-overview/accommo
 import { AccommodationRoutingModule } from './accommodation-routing.module';
 import { AccommodationService } from './accommodation.service';
 import { HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AccommodationCreateComponent } from './accommodation-create/accommodation-create.component';
 import { AlertModule } from '../alert/alert.module';
+import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
   declarations: [
-    AccommodationOverviewComponent
+    AccommodationOverviewComponent,
+    AccommodationCreateComponent
   ],
   imports: [
     BrowserModule,
-    // TODO: Change in auth http
-    HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AuthModule,
     AccommodationRoutingModule,
     AlertModule
   ],
