@@ -4,12 +4,10 @@ import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpHelper } from '../shared/helpers/http.helper';
-import { LoginModel } from './login/login.model';
 
 @Injectable()
 export class AuthService {
 
-    private user: LoginModel;
 
     constructor(protected http: Http) {
 
@@ -46,6 +44,11 @@ export class AuthService {
     }    
     
 
+    /**
+        * logs the user in with the API
+        * @param email The email of the user
+        * @param password The password
+    */
     public login(email: string, password: string): Observable<boolean> {
         return this.http.post(`${environment.apiUrl}/authentication/login`, {
             email: email, 

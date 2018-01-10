@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { BaseComponent } from '../../shared/base/basecomponent.class';
 import { LoginModel } from './login.model';
 import { AlertService } from '../../alert/alert.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
 	selector: 'app-auth-login',
@@ -14,7 +15,6 @@ export class AuthLoginComponent extends BaseComponent implements OnInit {
 
 	public loading = false;
 	public loginModel: LoginModel;
-	public submitInProgress: boolean;
 
 	@ViewChild('f')
 	private form: NgForm;
@@ -32,13 +32,12 @@ export class AuthLoginComponent extends BaseComponent implements OnInit {
 		const { email, password } = form.value;
 		this.subscription = this.authService.login(this.loginModel.email, this.loginModel.password)		
 		.subscribe((loggedin) => {
-			this.submitInProgress = false;
 			this.alertService.showSuccess('Successfully logged in.');
+			this.authService.isLoggedIn();
 			this.router.navigateByUrl('/dashboard');
-		  }, error => {
-			console.error(error);
-			this.submitInProgress = false;
+		}, 
+		error => {
 			this.alertService.showError('An error has occurred while trying to login.');
-		  });
+		});
 	}
 }
