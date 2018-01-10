@@ -24,9 +24,9 @@ export class AccommodationService {
   }
 
   /**
-   * Gets an accommodation of the id
-   * @param id The id of the accommodation
-   */
+    * Gets an accommodation of the id
+    * @param id The id of the accommodation
+    */
   public get(id: string): Observable<Accommodation> {
     return this.authHttp.get(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
       .map(r => r.json())
@@ -34,18 +34,18 @@ export class AccommodationService {
   }
 
   /**
-  * Adds a new accomodation
-  * @param accommodation The object of the accommodation
-  */
+    * Adds a new accomodation
+    * @param accommodation The object of the accommodation
+    */
   public create(accommodation: Accommodation): Observable<Accommodation> {
     return this.authHttp.post(`${environment.apiUrl}/accommodations`, accommodation)
       .map(r => r.json());
   }
 
   /**
-   * Updates an accommodation
-   * @param accommodation The object of the accommodation
-   */
+    * Updates an accommodation
+    * @param accommodation The object of the accommodation
+    */
   public update(accommodation: Accommodation): Observable<Accommodation> {
     return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodation.id}`, accommodation)
       .map(r => r.json());
