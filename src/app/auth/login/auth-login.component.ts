@@ -29,7 +29,6 @@ export class AuthLoginComponent extends BaseComponent implements OnInit {
 	}
 
 	onSubmit(form: NgForm) {
-		const { email, password } = form.value;
 		this.subscription = this.authService.login(this.loginModel.email, this.loginModel.password)		
 		.subscribe((loggedin) => {
 			this.alertService.showSuccess('Successfully logged in.');

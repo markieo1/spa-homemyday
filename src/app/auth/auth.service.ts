@@ -4,12 +4,13 @@ import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpHelper } from '../shared/helpers/http.helper';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
 
-    constructor(protected http: Http) {
+    constructor(protected http: Http, private router: Router) {
 
     }
 
@@ -18,6 +19,14 @@ export class AuthService {
     */
     isLoggedIn(): boolean {
         return tokenNotExpired();
+    }
+
+        if(this.isLoggedIn) {
+            return Observable.of(true);
+        }
+        else {
+            return Observable.of(false);
+        }
     }
 
     /**
@@ -57,7 +66,7 @@ export class AuthService {
         .map(response => {
             const responseToken = response.json().token;
 			if (responseToken) {
-                localStorage.setItem('token', responseToken);
+                localStorage.setItem('token', responseToken);                
 				return true;
             } 
             else {
