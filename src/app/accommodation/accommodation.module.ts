@@ -5,13 +5,13 @@ import { AccommodationRoutingModule } from './accommodation-routing.module';
 import { AccommodationService } from './accommodation.service';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AccommodationCreateComponent } from './accommodation-create/accommodation-create.component';
+import { AccommodationComponent } from './accommodation/accommodation.component';
 import { AlertModule } from '../alert/alert.module';
 
 @NgModule({
   declarations: [
     AccommodationOverviewComponent,
-    AccommodationCreateComponent
+    AccommodationComponent
   ],
   imports: [
     BrowserModule,

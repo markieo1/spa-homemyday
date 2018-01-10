@@ -11,6 +11,7 @@ import { Subject } from 'rxjs/Subject';
 export class AccommodationService {
 
   public onAddAccomodation: Subject<Accommodation>;
+  public onUpdateAccommodation: Subject<Accommodation>;
 
   // TODO: Replace HTTP with AuthHttp
   constructor(protected http: Http) {
@@ -29,13 +30,33 @@ export class AccommodationService {
   }
 
   /**
-  *Add a new accomodation
+   * Gets an accommodation of the id
+   * @param id The id of the accommodation
+   */
+  public get(id: string): Observable<Accommodation> {
+    return this.http.get(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
+      .map(r => r.json())
+      .map(r => new Accommodation(r));
+  }
+
+  /**
+  * Adds a new accomodation
   * @param accommodation The object of the accommodation
   */
-  public createAccomodation(accommodation: Accommodation): Observable<Accommodation> {
+  public create(accommodation: Accommodation): Observable<Accommodation> {
     return this.http.post(`${environment.apiUrl}/accommodations`, accommodation)
       .map(r => r.json());
   }
+
+  /**
+   * Updates an accommodation
+   * @param accommodation The object of the accommodation
+   */
+  public update(accommodation: Accommodation): Observable<Accommodation> {
+    return this.http.put(`${environment.apiUrl}/accommodations`, accommodation)
+      .map(r => r.json());
+  }
+
   /**
     * Deletes an accommodation of the id
     * @param id The id of the accommodation
