@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Headers, RequestOptionsArgs } from '@angular/http';
 import { Accommodation } from './accommodation.class';
 import { HttpHelper } from '../shared/helpers/http.helper';
+
 import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
@@ -22,6 +23,14 @@ export class AccommodationService {
       .toArray();
   }
 
+  /**
+  *Add a new accomodation
+  * @param accommodation The object of the accommodation
+  */
+  public createAccomodation(accommodation: Accommodation): Observable<Accommodation> {
+    return this.authHttp.post(`${environment.apiUrl}/accommodations`, accommodation)
+      .map(r => r.json());
+  }
   /**
     * Deletes an accommodation of the id
     * @param id The id of the accommodation
