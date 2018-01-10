@@ -4,8 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { Headers, RequestOptionsArgs } from '@angular/http';
 import { Accommodation } from './accommodation.class';
 import { HttpHelper } from '../shared/helpers/http.helper';
-import { EventEmitter } from '@angular/core/src/event_emitter';
-import { Subject } from 'rxjs/Subject';
 
 import { AuthHttp } from 'angular2-jwt';
 
