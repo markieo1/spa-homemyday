@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccommodationOverviewComponent } from './accommodation-overview/accommodation-overview.component';
-import { AccommodationComponent } from './accommodation/accommodation.component';
+import { AccommodationEditComponent } from './accommodation-edit/accommodation-edit.component';
 import { AuthGuard } from '../auth/auth-guard.service';
 
 const routes: Routes = [
@@ -12,12 +12,12 @@ const routes: Routes = [
   },
   {
     path: 'accommodations/new',
-    component: AccommodationComponent,
+    component: AccommodationEditComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'accommodations/:accommodationId',
-    component: AccommodationComponent,
+    component: AccommodationEditComponent,
     canActivate: [AuthGuard]
   },
 ];

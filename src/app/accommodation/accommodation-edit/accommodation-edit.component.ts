@@ -7,34 +7,45 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AlertService } from '../../alert/alert.service';
 
 @Component({
-  selector: 'app-accommodation',
-  templateUrl: 'accommodation.component.html'
+  selector: 'app-accommodation-edit',
+  templateUrl: 'accommodation-edit.component.html'
 })
 
-export class AccommodationComponent extends BaseComponent implements OnInit {
+export class AccommodationEditComponent extends BaseComponent implements OnInit {
 
+  /**
+    * The form of the accommodation
+    */
   public accommodationForm: FormGroup;
+  /**
+    * The accommodation object
+    */
   public accommodation: Accommodation;
-  public buttonValid: Boolean;
+  /**
+    * The id of the accommodation if it is in editmode
+    */
   public accommodationId: string;
+  /**
+    * The name of the component (New/Update Accommodations)
+    */
   public name: string;
+  /**
+    * Determines if a submit is in progress
+    */
+  public submitInProgress: boolean;
+  /**
+    * Determines if the component is in edit mode
+    */
   private editMode: boolean;
 
   constructor(private route: ActivatedRoute, private accomodationService: AccommodationService, private router: Router, private alertService: AlertService) {
     super();
     this.accommodation = new Accommodation();
-    this.buttonValid = false;
   }
 
   ngOnInit() {
     this.initForm();
     this.name = 'New Accommodations';
-
-    this.accommodationForm.valueChanges.subscribe(() => {
-      if (this.accommodation.name && this.accommodation.maxPersons && this.accommodation.price) {
-        this.buttonValid = true;
-      }
-    });
 
     this.route.params
       .subscribe((params: Params) => {
@@ -51,29 +62,42 @@ export class AccommodationComponent extends BaseComponent implements OnInit {
       });
   }
 
+  /**
+    * Saves a new or updated accommodation
+    */
   public onSubmit() {
     if (!this.accommodationForm.valid) {
       return;
     }
 
+    this.submitInProgress = true;
+
     if (!this.editMode) {
       this.accomodationService.create(this.accommodation).subscribe(() => {
         this.alertService.showSuccess('Accommodation successfully added.');
+          this.submitInProgress = false;
           this.router.navigate(['/accommodations']);
       }, error => {
+        this.submitInProgress = false;
         this.alertService.showError('An error has occurred while creating a new accommodation.');
       });
     } else {
       this.accomodationService.update(this.accommodation)
         .subscribe(() => {
           this.alertService.showSuccess('Accommodation successfully updated.');
+          this.submitInProgress = false;
           this.router.navigate(['/accommodations']);
         }, error => {
+          this.submitInProgress = false;
           this.alertService.showError('An error has occurred while updating the accommodation.');
         });
     }
   }
 
+  /**
+    * Initialize the accommodation form
+    * @param accommodation The accommodation object
+    */
   private initForm(accommodation?: Accommodation) {
       this.accommodationForm = new FormGroup({
         'name': new FormControl(accommodation ? accommodation.name : '', Validators.required),

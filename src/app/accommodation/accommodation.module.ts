@@ -5,14 +5,14 @@ import { AccommodationRoutingModule } from './accommodation-routing.module';
 import { AccommodationService } from './accommodation.service';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AccommodationComponent } from './accommodation/accommodation.component';
+import { AccommodationEditComponent } from './accommodation-edit/accommodation-edit.component';
 import { AlertModule } from '../alert/alert.module';
 import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
   declarations: [
     AccommodationOverviewComponent,
-    AccommodationComponent
+    AccommodationEditComponent
   ],
   imports: [
     BrowserModule,
