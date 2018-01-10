@@ -13,7 +13,7 @@ import { AlertService } from '../../alert/alert.service';
 
 export class AccommodationComponent extends BaseComponent implements OnInit {
 
-  public accommodationtForm: FormGroup;
+  public accommodationForm: FormGroup;
   public accommodation: Accommodation;
   public buttonValid: Boolean;
   public accommodationId: string;
@@ -30,7 +30,7 @@ export class AccommodationComponent extends BaseComponent implements OnInit {
     this.initForm();
     this.name = 'New Accommodations';
 
-    this.accommodationtForm.valueChanges.subscribe(() => {
+    this.accommodationForm.valueChanges.subscribe(() => {
       if (this.accommodation.name && this.accommodation.maxPersons && this.accommodation.price) {
         this.buttonValid = true;
       }
@@ -43,13 +43,14 @@ export class AccommodationComponent extends BaseComponent implements OnInit {
         this.accomodationService.get(this.accommodationId)
           .subscribe((accommodation: Accommodation) => {
             this.name = 'Update Accommodations';
+            this.accommodation = accommodation;
             this.initForm(accommodation);
           });
       });
   }
 
   public onSubmit() {
-    if (!this.accommodationtForm.valid) {
+    if (!this.accommodationForm.valid) {
       return;
     }
 
@@ -58,14 +59,13 @@ export class AccommodationComponent extends BaseComponent implements OnInit {
         this.alertService.showSuccess('Accommodation successfully added.');
           this.router.navigate(['/accommodations']);
       }, error => {
-        console.log(error);
         this.alertService.showError('An error has occurred while creating a new accommodation.');
       });
     } else {
+      console.log(this.accommodation);
       this.accomodationService.update(this.accommodation)
-        .subscribe((accommodation: Accommodation) => {
+        .subscribe(() => {
           this.alertService.showSuccess('Accommodation successfully updated.');
-          this.accomodationService.onUpdateAccommodation.next(accommodation);
           this.router.navigate(['/accommodations']);
         }, error => {
           this.alertService.showError('An error has occurred while updating the accommodation.');
@@ -74,7 +74,7 @@ export class AccommodationComponent extends BaseComponent implements OnInit {
   }
 
   private initForm(accommodation?: Accommodation) {
-      this.accommodationtForm = new FormGroup({
+      this.accommodationForm = new FormGroup({
         'name': new FormControl(accommodation ? accommodation.name : '', Validators.required),
         'description': new FormControl(accommodation ? accommodation.description : ''),
         'maxPersons': new FormControl(accommodation ? accommodation.maxPersons : 0, Validators.required),

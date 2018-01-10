@@ -47,7 +47,7 @@ export class AccommodationService {
    * @param accommodation The object of the accommodation
    */
   public update(accommodation: Accommodation): Observable<Accommodation> {
-    return this.authHttp.put(`${environment.apiUrl}/accommodations`, accommodation)
+    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodation.id}`, accommodation)
       .map(r => r.json());
   }
 

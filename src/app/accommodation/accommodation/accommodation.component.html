@@ -3,7 +3,7 @@
         <h1 class="page-header">
             {{name}}
         </h1>
-        <form [formGroup]="accommodationtForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="accommodationForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="name">Name: </label>
                 <input label="Name" class="form-control" formControlName="name" type="text" [(ngModel)]="accommodation.name">
@@ -68,7 +68,7 @@
                 <label for="cancellationText">Cancellation:</label>
                 <textarea type="text" class="form-control" formControlName="cancellationText" [(ngModel)]="accommodation.cancellationText"></textarea>
             </div>
-            <button type="submit" class="btn btn-success" [disabled]="!createAccommodationForm.valid || submitInProgress">Save</button>
+            <button type="submit" class="btn btn-success" [disabled]="!accommodationForm.valid || submitInProgress">Save</button>
         </form>
     </div>
 </div>
