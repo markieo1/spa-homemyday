@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
-import { Http, Headers, RequestOptionsArgs } from '@angular/http';
+import { Headers, RequestOptionsArgs } from '@angular/http';
 import { Accommodation } from './accommodation.class';
 import { HttpHelper } from '../shared/helpers/http.helper';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class AccommodationService {
-  // TODO: Replace HTTP with AuthHttp
-  constructor(protected http: Http) {
+  constructor(protected authHttp: AuthHttp) {
   }
 
   /**
     * Gets all the accommodations
     */
   public getAll(): Observable<Accommodation[]> {
-    return this.http.get(`${environment.apiUrl}/accommodations`, HttpHelper.getRequestOptions())
+    return this.authHttp.get(`${environment.apiUrl}/accommodations`, HttpHelper.getRequestOptions())
       .map(r => r.json())
       .flatMap(r => r)
       .map(r => new Accommodation(r))
@@ -27,7 +27,7 @@ export class AccommodationService {
     * @param id The id of the accommodation
     */
   public delete(id: string) {
-    return this.http.delete(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
+    return this.authHttp.delete(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
       .map(r => r.json());
   }
 }
