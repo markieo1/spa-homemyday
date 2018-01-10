@@ -23,11 +23,6 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
     this.subscription = this.accommodationService.getAll().subscribe(accommodations => {
       this.accommodations = accommodations;
     });
-    this.accommodationService.onUpdateAccommodation
-      .subscribe((accommodation: Accommodation) => {
-        const index = this.accommodations.findIndex(x => x.id === accommodation.id);
-        this.accommodations[index] = accommodation;
-      });
   }
 
   /**

@@ -68,7 +68,7 @@
                 <label for="cancellationText">Cancellation:</label>
                 <textarea type="text" class="form-control" formControlName="cancellationText" [(ngModel)]="accommodation.cancellationText"></textarea>
             </div>
-            <button type="submit" class="btn btn-success" [disabled]="!buttonValid">Save</button>
+            <button type="submit" class="btn btn-success" [disabled]="!createAccommodationForm.valid || submitInProgress">Save</button>
         </form>
     </div>
 </div>
