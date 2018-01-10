@@ -10,11 +10,8 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class AccommodationService {
 
-  public onAddAccomodation: Subject<Accommodation>;
-
   // TODO: Replace HTTP with AuthHttp
   constructor(protected http: Http) {
-    this.onAddAccomodation = new Subject<Accommodation>();
   }
 
   /**
