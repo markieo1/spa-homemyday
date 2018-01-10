@@ -30,6 +30,7 @@ export class AccommodationService {
 
   /**
   *Add a new accomodation
+  * @param accommodation The object of the accommodation
   */
   public createAccomodation(accommodation: Accommodation): Observable<Accommodation> {
     return this.http.post(`${environment.apiUrl}/accommodations`, accommodation)
