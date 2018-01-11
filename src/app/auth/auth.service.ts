@@ -57,7 +57,7 @@ export class AuthService {
         * @param email The email of the user
         * @param password The password
     */
-    public login(email: string, password: string): Observable<any> {
+    public login(email: string, password: string): Observable<boolean> {
         return this.http.post(`${environment.apiUrl}/authentication/login`, {
             email: email, 
             password: password

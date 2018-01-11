@@ -5,7 +5,6 @@ import { AuthService } from '../auth.service';
 import { BaseComponent } from '../../shared/base/basecomponent.class';
 import { LoginModel } from './loginmodel.class';
 import { AlertService } from '../../alert/alert.service';
-import { AppComponent } from '../../app.component';
 
 @Component({
 	selector: 'app-auth-login',

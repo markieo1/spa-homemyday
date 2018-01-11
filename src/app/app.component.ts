@@ -6,19 +6,17 @@ import { BaseComponent } from './shared/base/basecomponent.class';
 	selector: 'app-root',
 	templateUrl: 'app.component.html'
 })
-export class AppComponent extends BaseComponent implements OnInit {
+export class AppComponent implements OnInit {
 
 	/**
 	* Determines if logged in
 	*/
 	public isLoggedIn: boolean;
 
-	constructor(private authService: AuthService) { 
-		super();
-	}
+	constructor(private authService: AuthService) { }
 
 	ngOnInit() {
-		this.subscription = this.authService.loggedIn().subscribe((response) => {
+		this.authService.loggedIn().subscribe((response) => {
 			this.isLoggedIn = response;
 		}); 
 	}
