@@ -11,7 +11,6 @@ export class AlertService {
             title: 'Are you sure?',
             text: 'You will not be able to undo this action!',
             type: 'warning',
-            input: 'textarea',
             showCancelButton: true,
             confirmButtonText: 'Yes',
             cancelButtonText: 'No'
