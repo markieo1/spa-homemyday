@@ -26,14 +26,11 @@ export class AccommodationDetailComponent extends BaseComponent implements OnIni
         const id = params['id'];
         this.serviceAccommodation.getAccommodation(id).subscribe(
           (acco: Accommodation) => {
-            if (Object.keys(acco).length !== 0 && acco.constructor !== Object) {
-              this.accommodation = acco;
-            } else {
-              this.serviceAlert.showError('An error has occurred while viewing a existing accommodation.');
-              this.backToOverview();
-            }
-          }
-        );
+            this.accommodation = acco;
+          }, (error) => {
+            this.serviceAlert.showError('An error has occurred while viewing a existing accommodation.');
+            this.backToOverview();
+        });
       }
     );
   }
