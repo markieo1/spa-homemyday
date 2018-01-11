@@ -45,12 +45,4 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
         }
       });
   }
-
-  /**
-    * Navigate to update page
-    * @param id The id of the accommodation
-    */
-  onAccommodationUpdateClick(id: string) {
-    this.router.navigate([`/accommodations/${id}`]);
-  }
 }
