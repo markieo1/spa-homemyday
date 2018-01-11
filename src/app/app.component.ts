@@ -9,15 +9,16 @@ import { BaseComponent } from './shared/base/basecomponent.class';
 export class AppComponent implements OnInit {
 
   /**
-	  * Determines if logged in
-	  */
+    * Determines if logged in
+    */
   public isLoggedIn: boolean;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.authService.loggedIn().subscribe((response) => {
-      this.isLoggedIn = response;
-    });
+    this.authService.loggedIn()
+      .subscribe((response) => {
+        this.isLoggedIn = response;
+      });
   }
 }
