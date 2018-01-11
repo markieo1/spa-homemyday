@@ -21,7 +21,7 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
 
   public ngOnInit() {
     // Load all the accommodations
-    this.subscription = this.accommodationService.getAll().subscribe(accommodations => {
+    this.subscription = this.accommodationService.getForCurrentUser().subscribe(accommodations => {
       this.accommodations = accommodations;
     });
   }

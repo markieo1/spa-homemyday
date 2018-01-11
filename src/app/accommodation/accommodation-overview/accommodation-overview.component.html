@@ -3,6 +3,7 @@
     <h1 class="page-header">
       Accommodations
     </h1>
+    <button type="button" class="btn btn-success" routerLink="./edit/new">New Accommodation</button>
     <div class="table-responsive" *ngIf="accommodations; else noAccommodationsTemplate">
       <table class="table table-striped table-bordered table-hover">
         <thead>
@@ -16,12 +17,14 @@
           <tr *ngFor="let accommodation of accommodations; let i = index">
             <td><a [routerLink]="[accommodation.id]">{{ accommodation.name }}</a></td>
             <td class="text-right">{{ accommodation.price }}</td>
-            <td><button type="button" class="btn btn-warning" (click)="onAccommodationDeleteClick(accommodation.id)">Delete</button></td>
+            <td>
+              <button type="button" class="btn btn-warning" (click)="onAccommodationDeleteClick(accommodation.id)">Delete</button>
+              <button type="button" class="btn btn-secondary" [routerLink]="['./edit', accommodation.id]">Edit</button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <button type="button" class="btn btn-success" routerLink="./new">New Accommodation</button>
     <ng-template #noAccommodationsTemplate>
       No accommodations yet...
     </ng-template>

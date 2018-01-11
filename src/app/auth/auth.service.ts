@@ -1,30 +1,39 @@
+import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpHelper } from '../shared/helpers/http.helper';
-import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AuthService {
+  private loggedInEmitter: BehaviorSubject<boolean>;
 
   constructor(protected http: Http) {
-
+    this.loggedInEmitter = new BehaviorSubject(this.isLoggedIn());
   }
 
   /**
-    * Checks if the user is logged in
-    */
+  * Checks if the user is logged in
+  */
   isLoggedIn(): boolean {
     return tokenNotExpired();
   }
 
   /**
-    * Registers the user with the API
-    * @param email The email of the user
-    * @param password The password
-    * @param confirmPassword The confirm password
-    */
+  * returns a new BehaviorSubject
+  */
+  loggedIn(): Observable<boolean> {
+    return this.loggedInEmitter;
+  }
+
+  /**
+      * Registers the user with the API
+      * @param email The email of the user
+      * @param password The password
+      * @param confirmPassword The confirm password
+  */
   public register(email: string, password: string, confirmPassword: string): Observable<any> {
     if (!email || !password || !confirmPassword) {
       return Observable.throw(new Error('Invalid data supplied!'));
@@ -40,5 +49,36 @@ export class AuthService {
       password
     }, HttpHelper.getRequestOptions())
       .map(r => r.status === 201);
+  }
+
+
+  /**
+      * logs the user in with the API
+      * @param email The email of the user
+      * @param password The password
+  */
+  public login(email: string, password: string): Observable<boolean> {
+    return this.http.post(`${environment.apiUrl}/authentication/login`, {
+      email: email,
+      password: password
+    })
+      .map(response => {
+        const responseToken = response.json().token;
+        if (responseToken) {
+          localStorage.setItem('token', responseToken);
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .do((loggedIn) => this.loggedInEmitter.next(loggedIn));
+  }
+
+  /**
+  * Removed user token and logout user.
+  */
+  logout() {
+    localStorage.removeItem('token');
+    this.loggedInEmitter.next(false);
   }
 }
