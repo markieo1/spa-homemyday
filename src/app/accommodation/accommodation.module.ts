@@ -16,11 +16,8 @@ import { AccommodationDetailComponent } from './accommodation-detail/accommodati
   declarations: [
     AccommodationComponent,
     AccommodationOverviewComponent,
-<<<<<<< HEAD
     AccommodationApproveComponent,
-=======
     AccommodationDetailComponent,
->>>>>>> efa58c0f271cdb4c2dd398f0477ccd8a5c65b7ad
     AccommodationEditComponent,
     AccommodationComponent,
   ],
