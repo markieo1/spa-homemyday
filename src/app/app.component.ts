@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
+import { BaseComponent } from './shared/base/basecomponent.class';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,10 @@ export class AppComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn();
+  ngOnInit() {
+    this.authService.loggedIn()
+      .subscribe((response) => {
+        this.isLoggedIn = response;
+      });
   }
 }
