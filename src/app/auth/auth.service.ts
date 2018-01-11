@@ -75,6 +75,9 @@ export class AuthService {
         .do((loggedIn) => this.loggedInEmitter.next(loggedIn));
     }
 
+    /**
+    * Removed user token and logout user.
+    */
     logout() {
         localStorage.removeItem('token');
         this.loggedInEmitter.next(false);        
