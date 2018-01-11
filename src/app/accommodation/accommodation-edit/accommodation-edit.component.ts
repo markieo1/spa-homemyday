@@ -47,20 +47,18 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     this.initForm();
     this.name = 'New Accommodations';
 
-    console.log('Initialized');
-
     this.route.params
       .subscribe((params: Params) => {
         this.editMode = params['accommodationId'] != null;
         this.accommodationId = params['accommodationId'];
-        if (this.accommodationId != null && this.accommodationId.length > 0) {
-          this.accomodationService.get(this.accommodationId)
-            .subscribe((accommodation: Accommodation) => {
-              this.name = 'Update Accommodations';
-              this.accommodation = accommodation;
-              this.initForm(accommodation);
-            });
-        }
+          if (this.accommodationId != null && this.accommodationId.length > 0) {
+            this.accomodationService.get(this.accommodationId)
+              .subscribe((accommodation: Accommodation) => {
+                this.name = 'Update Accommodations';
+                this.accommodation = accommodation;
+                this.fillForm(accommodation);
+              });
+          }
       });
   }
 
@@ -97,27 +95,52 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
   }
 
   /**
+    * Sets the value of the accommodation form
+    * @param accommodation The object of accommodation
+    */
+  private fillForm(accommodation: Accommodation) {
+    this.accommodationForm.setValue({
+      'name': accommodation.name || '',
+      'description': accommodation.description || '',
+      'maxPersons': accommodation.maxPersons || 0,
+      'continent': accommodation.continent || '',
+      'country': accommodation.country || '',
+      'location': accommodation.location || '',
+      'latitude': accommodation.latitude || '',
+      'longitude': accommodation.longitude || '',
+      'rooms': accommodation.rooms || 0,
+      'beds': accommodation.beds || 0,
+      'price': accommodation.price || '',
+      'spaceText': accommodation.spaceText || '',
+      'servicesText': accommodation.servicesText || '',
+      'pricesText': accommodation.pricesText || '',
+      'rulesText': accommodation.rulesText || '',
+      'cancellationText': accommodation.cancellationText || ''
+    });
+  }
+
+  /**
     * Initialize the accommodation form
     * @param accommodation The accommodation object
     */
-  private initForm(accommodation?: Accommodation) {
+  private initForm() {
       this.accommodationForm = new FormGroup({
-        'name': new FormControl(accommodation ? accommodation.name : '', Validators.required),
-        'description': new FormControl(accommodation ? accommodation.description : ''),
-        'maxPersons': new FormControl(accommodation ? accommodation.maxPersons : 0, Validators.required),
-        'continent': new FormControl(accommodation ? accommodation.continent : ''),
-        'country': new FormControl(accommodation ? accommodation.country : ''),
-        'location': new FormControl(accommodation ? accommodation.location : ''),
-        'latitude': new FormControl(accommodation ? accommodation.latitude : ''),
-        'longitude': new FormControl(accommodation ? accommodation.longitude : ''),
-        'rooms': new FormControl(accommodation ? accommodation.rooms : 0),
-        'beds': new FormControl(accommodation ? accommodation.beds : 0),
-        'price': new FormControl(accommodation ? accommodation.price : '0', Validators.required),
-        'spaceText': new FormControl(accommodation ? accommodation.spaceText : ''),
-        'servicesText': new FormControl(accommodation ? accommodation.servicesText : ''),
-        'pricesText': new FormControl(accommodation ? accommodation.pricesText : ''),
-        'rulesText': new FormControl(accommodation ? accommodation.rulesText : ''),
-        'cancellationText': new FormControl(accommodation ? accommodation.cancellationText : '')
+        'name': new FormControl('', Validators.required),
+        'description': new FormControl(''),
+        'maxPersons': new FormControl(0, Validators.required),
+        'continent': new FormControl(''),
+        'country': new FormControl(''),
+        'location': new FormControl(''),
+        'latitude': new FormControl(''),
+        'longitude': new FormControl(''),
+        'rooms': new FormControl(0),
+        'beds': new FormControl(0),
+        'price': new FormControl('0', Validators.required),
+        'spaceText': new FormControl(''),
+        'servicesText': new FormControl(''),
+        'pricesText': new FormControl(''),
+        'rulesText': new FormControl(''),
+        'cancellationText': new FormControl('')
       });
   }
 }
