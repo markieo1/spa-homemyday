@@ -9,8 +9,7 @@ const routes: Routes = [
   {
     path: 'accommodations', component: AccommodationComponent, children: [
       { path: '', component: AccommodationOverviewComponent },
-      { path: 'new', component: AccommodationEditComponent },
-      { path: ':accommodationId/update', component: AccommodationEditComponent }
+      { path: 'edit/:accommodationId', component: AccommodationEditComponent }
     ],
     canActivate: [AuthGuard]
   }

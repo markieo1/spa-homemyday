@@ -25,18 +25,16 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     * The id of the accommodation if it is in editmode
     */
   public accommodationId: string;
+
   /**
-    * The name of the component (New/Update Accommodations)
+    * Determines if the component is new
     */
-  public name: string;
+  public isNew: boolean;
+
   /**
     * Determines if a submit is in progress
     */
   public submitInProgress: boolean;
-  /**
-    * Determines if the component is in edit mode
-    */
-  private editMode: boolean;
 
   constructor(private route: ActivatedRoute, private accomodationService: AccommodationService, private router: Router, private alertService: AlertService) {
     super();
@@ -45,20 +43,25 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
 
   ngOnInit() {
     this.initForm();
-    this.name = 'New Accommodations';
 
     this.route.params
       .subscribe((params: Params) => {
-        this.editMode = params['accommodationId'] != null;
-        this.accommodationId = params['accommodationId'];
+        const accommodationId = params.accommodationId;
+
+        if (accommodationId === 'new') {
+          this.isNew = true;
+          this.accommodation = new Accommodation();
+        } else {
+          this.isNew = false;
+          this.accommodationId = params['accommodationId'];
           if (this.accommodationId != null && this.accommodationId.length > 0) {
             this.accomodationService.get(this.accommodationId)
               .subscribe((accommodation: Accommodation) => {
-                this.name = 'Update Accommodations';
                 this.accommodation = accommodation;
                 this.fillForm(accommodation);
               });
           }
+        }
       });
   }
 
@@ -72,7 +75,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
 
     this.submitInProgress = true;
 
-    if (!this.editMode) {
+    if (this.isNew) {
       this.accomodationService.create(this.accommodation).subscribe(() => {
         this.alertService.showSuccess('Accommodation successfully added.');
           this.submitInProgress = false;
