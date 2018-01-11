@@ -4,12 +4,13 @@ import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Params } from '@angular/router';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Accommodation } from '../accommodation.class';
+import { BaseComponent } from '../../shared/base/basecomponent.class';
 
 @Component({
   selector: 'app-accommodation-detail',
   templateUrl: 'accommodation-detail.component.html',
 })
-export class AccommodationDetailComponent implements OnInit, OnDestroy {
+export class AccommodationDetailComponent extends BaseComponent implements OnInit, OnDestroy {
   public name: string;
   public description: string;
   public maxPersons: number;
@@ -19,15 +20,14 @@ export class AccommodationDetailComponent implements OnInit, OnDestroy {
   public country: string;
   public location: string;
   public price: string;
-  private subs: Subscription[] = [
-    new Subscription()
-  ];
 
   constructor(private serviceAccommodation: AccommodationService,
-              private aRoute: ActivatedRoute) { }
+              private aRoute: ActivatedRoute) {
+    super();
+ }
 
   ngOnInit() {
-    this.subs[0] = this.aRoute.params.subscribe(
+    this.subscription = this.aRoute.params.subscribe(
       (params: Params) => {
         const id = params['id'];
         this.serviceAccommodation.getAccommodation(id).subscribe(
@@ -46,9 +46,4 @@ export class AccommodationDetailComponent implements OnInit, OnDestroy {
       }
     );
   }
-
-  ngOnDestroy(): void {
-    this.subs[0].unsubscribe();
-  }
-
 }

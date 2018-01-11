@@ -4,11 +4,13 @@ import { AccommodationOverviewComponent } from './accommodation-overview/accommo
 import { AccommodationCreateComponent } from './accommodation-create/accommodation-create.component';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { AccommodationComponent } from './accommodation.component';
+import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
 
 const routes: Routes = [
   { path: 'accommodations', component: AccommodationComponent, children: [
     { path: '', component: AccommodationOverviewComponent },
     { path: 'new', component: AccommodationCreateComponent },
+    { path: ':id', component: AccommodationDetailComponent },
   ], canActivate: [AuthGuard]
   },
 ];
