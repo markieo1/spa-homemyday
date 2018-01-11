@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { tokenNotExpired } from 'angular2-jwt';
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -26,6 +26,22 @@ export class AuthService {
   */
   loggedIn(): Observable<boolean> {
     return this.loggedInEmitter;
+  }
+
+  /**
+   * Returns the email of the currently logged in user.
+   * @returns The email of the currently logged in user.
+   */
+  public getEmail(): string {
+    if (!this.isLoggedIn()) {
+      return null;
+    }
+
+    const token = localStorage.getItem('token');
+    const helper = new JwtHelper();
+    const tokenObj = helper.decodeToken(token);
+
+    return tokenObj.email;
   }
 
   /**
