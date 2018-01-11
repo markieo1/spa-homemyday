@@ -8,11 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccommodationCreateComponent } from './accommodation-create/accommodation-create.component';
 import { AlertModule } from '../alert/alert.module';
 import { AuthModule } from '../auth/auth.module';
+import { AccommodationApproveComponent } from './accommodation-approve/accommodation-approve.component';
 
 @NgModule({
   declarations: [
     AccommodationOverviewComponent,
-    AccommodationCreateComponent
+    AccommodationCreateComponent,
+    AccommodationApproveComponent
   ],
   imports: [
     BrowserModule,
