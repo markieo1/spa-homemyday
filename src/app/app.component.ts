@@ -3,21 +3,21 @@ import { AuthService } from './auth/auth.service';
 import { BaseComponent } from './shared/base/basecomponent.class';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: 'app.component.html'
+  selector: 'app-root',
+  templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit {
 
-	/**
+  /**
 	* Determines if logged in
 	*/
-	public isLoggedIn: boolean;
+  public isLoggedIn: boolean;
 
-	constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
-	ngOnInit() {
-		this.authService.loggedIn().subscribe((response) => {
-			this.isLoggedIn = response;
-		}); 
-	}
+  ngOnInit() {
+    this.authService.loggedIn().subscribe((response) => {
+      this.isLoggedIn = response;
+    });
+  }
 }

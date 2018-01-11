@@ -1,12 +1,12 @@
 export class LoginModel {
-	
-	/**
+
+  /**
     * The email of the user logged in
     */
-	email: string;
+  email: string;
 
-    /**
-    * The password of the user logged in
-    */
-	password: string;
+  /**
+  * The password of the user logged in
+  */
+  password: string;
 }

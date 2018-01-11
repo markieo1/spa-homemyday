@@ -13,7 +13,6 @@ export class TopbarComponent {
   }
 
   logout() {
-    console.log("test");
     this.authService.logout();
     this.router.navigate(['/login']);
   }
