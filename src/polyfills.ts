@@ -81,3 +81,4 @@ import 'rxjs/add/operator/pairwise';
 import 'rxjs/add/operator/exhaustMap';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/toArray';
+import 'rxjs/add/operator/do';
