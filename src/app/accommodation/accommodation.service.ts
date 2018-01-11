@@ -9,8 +9,8 @@ import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class AccommodationService {
-  constructor(protected authHttp: AuthHttp) {
-  }
+
+  constructor(protected authHttp: AuthHttp) {}
 
   /**
     * Gets all the accommodations
