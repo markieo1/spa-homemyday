@@ -10,7 +10,7 @@ import { IUserToken } from '../../shared/interfaces/iusertoken.interface';
 })
 export class TopbarComponent implements OnInit {
 
-  private user: IUserToken;
+  user: IUserToken;
 
   constructor(private authService: AuthService, private router: Router) {
 
