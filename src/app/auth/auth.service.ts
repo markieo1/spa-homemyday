@@ -28,10 +28,10 @@ export class AuthService {
     return this.loggedInEmitter;
   }
 
-  /**
-   * Returns the email of the currently logged in user.
-   * @returns The email of the currently logged in user.
-   */
+ /**
+  * Returns the email of the currently logged in user.
+  * @returns The email of the currently logged in user.
+  */
   public getEmail(): string {
     if (!this.isLoggedIn()) {
       return null;
