@@ -18,7 +18,7 @@ export class AccommodationDetailComponent extends BaseComponent implements OnIni
               private aRoute: ActivatedRoute,
               private router: Router) {
     super();
- }
+  }
 
   ngOnInit() {
     this.subscription = this.aRoute.params.subscribe(
