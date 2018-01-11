@@ -12,6 +12,7 @@ import { AccommodationComponent } from './accommodation.component';
 
 @NgModule({
   declarations: [
+    AccommodationComponent,
     AccommodationOverviewComponent,
     AccommodationEditComponent,
     AccommodationComponent,
