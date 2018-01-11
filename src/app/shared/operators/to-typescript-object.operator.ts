@@ -16,8 +16,8 @@ declare module 'rxjs/Observable' {
   // tslint:disable-next-line:no-shadowed-variable
   interface Observable<T> {
     /**
-     * Converts an array to an array of a typescript object
-     */
+      * Converts an array to an array of a typescript object
+      */
     arrayToTypescriptObject: typeof arrayToTypescriptObject;
   }
 }
