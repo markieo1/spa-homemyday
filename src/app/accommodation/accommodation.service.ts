@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { Headers, RequestOptionsArgs } from '@angular/http';
 import { Accommodation } from './accommodation.class';
 import { HttpHelper } from '../shared/helpers/http.helper';
-
 import { AuthHttp } from 'angular2-jwt';
+import '../shared/operators/to-typescript-object.operator';
 
 @Injectable()
 export class AccommodationService {
@@ -18,9 +18,7 @@ export class AccommodationService {
   public getAll(): Observable<Accommodation[]> {
     return this.authHttp.get(`${environment.apiUrl}/accommodations`, HttpHelper.getRequestOptions())
       .map(r => r.json())
-      .flatMap(r => r)
-      .map(r => new Accommodation(r))
-      .toArray();
+      .arrayToTypescriptObject(Accommodation);
   }
 
   /**
@@ -68,8 +66,6 @@ export class AccommodationService {
   public getForCurrentUser(): Observable<Accommodation[]> {
     return this.authHttp.get(`${environment.apiUrl}/accommodations/me`, HttpHelper.getRequestOptions())
       .map(r => r.json())
-      .flatMap(r => r)
-      .map(r => new Accommodation(r))
-      .toArray();
+      .arrayToTypescriptObject(Accommodation);
   }
 }
