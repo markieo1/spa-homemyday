@@ -5,6 +5,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpHelper } from '../shared/helpers/http.helper';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { IUserToken } from '../shared/interfaces/iusertoken.interface';
 
 @Injectable()
 export class AuthService {
@@ -32,16 +33,16 @@ export class AuthService {
   * Returns the email of the currently logged in user.
   * @returns The email of the currently logged in user.
   */
-  public getEmail(): string {
+  public getUserInfo(): IUserToken {
     if (!this.isLoggedIn()) {
       return null;
     }
 
     const token = localStorage.getItem('token');
     const helper = new JwtHelper();
-    const tokenObj = helper.decodeToken(token);
+    const tokenObj = helper.decodeToken(token) as IUserToken;
 
-    return tokenObj.email;
+    return tokenObj;
   }
 
   /**

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { IUserToken } from '../../shared/interfaces/iusertoken.interface';
 
 @Component({
   selector: 'app-navigation-topbar',
@@ -9,14 +10,14 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class TopbarComponent implements OnInit {
 
-  private email: string;
+  private user: IUserToken;
 
   constructor(private authService: AuthService, private router: Router) {
 
   }
 
   ngOnInit() {
-    this.email = this.authService.getEmail();
+    this.user = this.authService.getUserInfo();
   }
 
   logout() {
