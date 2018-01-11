@@ -5,7 +5,7 @@ import { AccommodationRoutingModule } from './accommodation-routing.module';
 import { AccommodationService } from './accommodation.service';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AccommodationCreateComponent } from './accommodation-create/accommodation-create.component';
+import { AccommodationEditComponent } from './accommodation-edit/accommodation-edit.component';
 import { AlertModule } from '../alert/alert.module';
 import { AuthModule } from '../auth/auth.module';
 import { AccommodationApproveComponent } from './accommodation-approve/accommodation-approve.component';
@@ -15,8 +15,9 @@ import { AccommodationComponent } from './accommodation.component';
   declarations: [
     AccommodationComponent,
     AccommodationOverviewComponent,
-    AccommodationCreateComponent,
-    AccommodationApproveComponent
+    AccommodationApproveComponent,
+    AccommodationEditComponent,
+    AccommodationComponent,
   ],
   imports: [
     BrowserModule,
