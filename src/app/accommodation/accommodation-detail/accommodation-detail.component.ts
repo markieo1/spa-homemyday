@@ -10,7 +10,7 @@ export class AccommodationDetailComponent implements OnInit {
   constructor(private serviceAccommodation: AccommodationService) { }
 
   ngOnInit() {
-    console.log(this.serviceAccommodation.getAccommodation('1'));
+    this.serviceAccommodation.getAccommodation('1');
   }
 
 }

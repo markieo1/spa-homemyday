@@ -9,11 +9,13 @@ import { AccommodationCreateComponent } from './accommodation-create/accommodati
 import { AlertModule } from '../alert/alert.module';
 import { AuthModule } from '../auth/auth.module';
 import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
+import { AccommodationComponent } from './accommodation.component';
 
 @NgModule({
   declarations: [
+    AccommodationComponent,
     AccommodationOverviewComponent,
-    AccommodationCreateComponent
+    AccommodationCreateComponent,
     AccommodationDetailComponent
   ],
   imports: [
