@@ -9,8 +9,8 @@ import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class AccommodationService {
-  constructor(protected authHttp: AuthHttp) {
-  }
+
+  constructor(protected authHttp: AuthHttp) { }
 
   /**
     * Gets all the accommodations
@@ -38,5 +38,16 @@ export class AccommodationService {
   public delete(id: string) {
     return this.authHttp.delete(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
       .map(r => r.json());
+  }
+
+  /**
+    * Gets the accommodations for the current user
+    */
+  public getForCurrentUser(): Observable<Accommodation[]> {
+    return this.authHttp.get(`${environment.apiUrl}/accommodations/me`, HttpHelper.getRequestOptions())
+      .map(r => r.json())
+      .flatMap(r => r)
+      .map(r => new Accommodation(r))
+      .toArray();
   }
 }
