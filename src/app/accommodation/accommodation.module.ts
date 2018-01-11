@@ -10,12 +10,17 @@ import { AlertModule } from '../alert/alert.module';
 import { AuthModule } from '../auth/auth.module';
 import { AccommodationApproveComponent } from './accommodation-approve/accommodation-approve.component';
 import { AccommodationComponent } from './accommodation.component';
+import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
 
 @NgModule({
   declarations: [
     AccommodationComponent,
     AccommodationOverviewComponent,
+<<<<<<< HEAD
     AccommodationApproveComponent,
+=======
+    AccommodationDetailComponent,
+>>>>>>> efa58c0f271cdb4c2dd398f0477ccd8a5c65b7ad
     AccommodationEditComponent,
     AccommodationComponent,
   ],

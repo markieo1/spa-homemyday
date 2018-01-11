@@ -16,7 +16,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let accommodation of accommodations; let i = index">
-            <td>{{ accommodation.name }}</td>
+            <td><a [routerLink]="[accommodation.id]">{{ accommodation.name }}</a></td>
             <td class="text-right">{{ accommodation.price }}</td>
             <td class="text-right">{{ accommodation.approveStatus.status }}</td>
             <td>

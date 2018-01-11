@@ -1,0 +1,44 @@
+<div class="container" *ngIf="accommodation">
+
+    <h1>{{ accommodation.name }}</h1>
+
+    <div class="row">
+
+        <div class="col-md-8">
+            <img class="img-responsive" src="http://placehold.it/750x500" alt="">
+        </div>
+
+        <div class="col-md-4">
+            <h3>Description</h3>
+            <p>{{ accommodation.description }}</p>
+
+            <h3>Rooms</h3>
+            <p>{{ accommodation.spaceText }}</p>
+
+            <h3>Services</h3>
+            <p>{{ accommodation.servicesText }}</p>
+
+            <h3>Rules</h3>
+            <p>{{ accommodation.rulesText }}</p>
+
+            <h3>Prices</h3>
+            <p>{{ accommodation.pricesText }}</p>
+
+            <h3>Cancel</h3>
+            <p>{{ accommodation.cancellationText }}</p>
+
+            <h3>Details</h3>
+            <ul>
+                <li>Maximum persons: {{ accommodation.maxPersons }}</li>
+                <li>Number of rooms: {{ accommodation.rooms }}</li>
+                <li>Number of beds:{{ accommodation.beds }}</li>
+                <li>Continent: {{ accommodation.continent }}</li>
+                <li>Country: {{ accommodation.country }}</li>
+                <li>Location: {{ accommodation.location }}</li>
+            </ul>
+
+            <h2>€ {{ accommodation.price }}</h2>
+        </div>
+
+    </div>
+</div>

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { tokenNotExpired } from 'angular2-jwt';
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpHelper } from '../shared/helpers/http.helper';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { IUserToken } from '../shared/interfaces/iusertoken.interface';
 
 @Injectable()
 export class AuthService {
@@ -26,6 +27,22 @@ export class AuthService {
   */
   loggedIn(): Observable<boolean> {
     return this.loggedInEmitter;
+  }
+
+  /**
+  * Get the user info of the currently logged in user.
+  * @returns The user info of the currently logged in user, as an instance of IUserToken.
+  */
+  public getUserInfo(): IUserToken {
+    if (!this.isLoggedIn()) {
+      return null;
+    }
+
+    const token = localStorage.getItem('token');
+    const helper = new JwtHelper();
+    const tokenObj = helper.decodeToken(token) as IUserToken;
+
+    return tokenObj;
   }
 
   /**

@@ -5,11 +5,13 @@ import { AccommodationEditComponent } from './accommodation-edit/accommodation-e
 import { AuthGuard } from '../auth/auth-guard.service';
 import { AccommodationApproveComponent } from './accommodation-approve/accommodation-approve.component';
 import { AccommodationComponent } from './accommodation.component';
+import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
 
 const routes: Routes = [
   {
     path: 'accommodations', component: AccommodationComponent, children: [
       { path: '', component: AccommodationOverviewComponent },
+      { path: ':id', component: AccommodationDetailComponent },
       { path: 'edit/:accommodationId', component: AccommodationEditComponent },
       {
         path: 'approve',
