@@ -24,13 +24,35 @@ export class AccommodationService {
   }
 
   /**
-  *Add a new accomodation
-  * @param accommodation The object of the accommodation
-  */
-  public createAccomodation(accommodation: Accommodation): Observable<Accommodation> {
-    return this.authHttp.post(`${environment.apiUrl}/accommodations`, accommodation)
-      .map(r => r.json());
+    * Gets an accommodation of the id
+    * @param id The id of the accommodation
+    */
+  public get(id: string): Observable<Accommodation> {
+    return this.authHttp.get(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
+      .map(r => r.json())
+      .map(r => new Accommodation(r));
   }
+
+  /**
+    * Adds a new accomodation
+    * @param accommodation The object of the accommodation
+    */
+  public create(accommodation: Accommodation): Observable<Accommodation> {
+    return this.authHttp.post(`${environment.apiUrl}/accommodations`, accommodation)
+      .map(r => r.json())
+      .map(r => new Accommodation(r));
+  }
+
+  /**
+    * Updates an accommodation
+    * @param accommodation The object of the accommodation
+    */
+  public update(accommodation: Accommodation): Observable<Accommodation> {
+    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodation.id}`, accommodation)
+      .map(r => r.json())
+      .map(r => new Accommodation(r));
+  }
+
   /**
     * Deletes an accommodation of the id
     * @param id The id of the accommodation
