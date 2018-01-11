@@ -32,8 +32,7 @@ export class AuthLoginComponent extends BaseComponent implements OnInit {
 		this.subscription = this.authService.login(this.loginModel.email, this.loginModel.password)		
 		.subscribe((loggedin) => {
 			this.alertService.showSuccess('Successfully logged in.');
-			this.authService.isLoggedIn();
-			this.router.navigateByUrl('/dashboard');
+			this.router.navigateByUrl('/');
 		}, 
 		error => {
 			this.alertService.showError('An error has occurred while trying to login.');
