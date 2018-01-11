@@ -14,7 +14,8 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
     */
   public accommodations: Accommodation[];
 
-  constructor(private accommodationService: AccommodationService, private alertService: AlertService) {
+  constructor(private accommodationService: AccommodationService,
+              private alertService: AlertService) {
     super();
   }
 
