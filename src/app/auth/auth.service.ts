@@ -29,9 +29,9 @@ export class AuthService {
     return this.loggedInEmitter;
   }
 
- /**
-  * Returns the email of the currently logged in user.
-  * @returns The email of the currently logged in user.
+  /**
+  * Get the user info of the currently logged in user.
+  * @returns The user info of the currently logged in user, as an instance of IUserToken.
   */
   public getUserInfo(): IUserToken {
     if (!this.isLoggedIn()) {
