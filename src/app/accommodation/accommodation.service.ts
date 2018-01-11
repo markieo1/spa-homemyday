@@ -25,7 +25,7 @@ export class AccommodationService {
 
   public getAccommodation(id: string): Observable<Accommodation> {
     return this.authHttp.get(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
-      .map(r => new Accommodation(r));
+      .map(r => r.json());
   }
 
   /**
