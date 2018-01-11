@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" *ngIf="accommodation">
 
-    <h1 class="my-4">{{ name }}</h1>
+    <h1>{{ accommodation.name }}</h1>
 
     <div class="row">
 
@@ -9,19 +9,35 @@
         </div>
 
         <div class="col-md-4">
-            <h3 class="my-3">Omschrijving</h3>
-            <p>{{ description }}</p>
-            <h3 class="my-3">Details</h3>
+            <h3>Omschrijving</h3>
+            <p>{{ accommodation.description }}</p>
+
+            <h3>Ruimte</h3>
+            <p>{{ accommodation.spaceText }}</p>
+
+            <h3>Services</h3>
+            <p>{{ accommodation.servicesText }}</p>
+
+            <h3>Regels</h3>
+            <p>{{ accommodation.rulesText }}</p>
+
+            <h3>Prijzen</h3>
+            <p>{{ accommodation.pricesText }}</p>
+
+            <h3>Annuleren</h3>
+            <p>{{ accommodation.cancellationText }}</p>
+
+            <h3>Details</h3>
             <ul>
-                <li>Maximale personen: {{ maxPersons }}</li>
-                <li>Aantal kamers: {{ rooms }}</li>
-                <li>Aantal bedden:{{ beds }}</li>
-                <li>Continent: {{ continent }}</li>
-                <li>Land: {{ country }}</li>
-                <li>Locatie: {{ location }}</li>
+                <li>Maximale personen: {{ accommodation.maxPersons }}</li>
+                <li>Aantal kamers: {{ accommodation.rooms }}</li>
+                <li>Aantal bedden:{{ accommodation.beds }}</li>
+                <li>Continent: {{ accommodation.continent }}</li>
+                <li>Land: {{ accommodation.country }}</li>
+                <li>Locatie: {{ accommodation.location }}</li>
             </ul>
 
-            <h2 class="my-4">€ {{ price }}</h2>
+            <h2>€ {{ accommodation.price }}</h2>
         </div>
 
     </div>

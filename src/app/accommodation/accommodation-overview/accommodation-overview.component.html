@@ -14,7 +14,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let accommodation of accommodations; let i = index">
-            <td><a routerLink="{{ accommodation.id }}">{{ accommodation.name }}</a></td>
+            <td><a [routerLink]="[accommodation.id]">{{ accommodation.name }}</a></td>
             <td class="text-right">{{ accommodation.price }}</td>
             <td><button type="button" class="btn btn-warning" (click)="onAccommodationDeleteClick(accommodation.id)">Delete</button></td>
           </tr>
