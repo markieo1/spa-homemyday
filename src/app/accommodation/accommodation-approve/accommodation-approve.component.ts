@@ -21,8 +21,8 @@ export class AccommodationApproveComponent extends BaseComponent implements OnIn
 
   ngOnInit() {
     // Load all the awaiting accommodations
-    this.subscription = this.accommodationService.getAll().subscribe(accommodations => {
-      this.accommodations = accommodations.filter(accommodation => accommodation.approveStatus.status === 'Awaiting');
+    this.subscription = this.accommodationService.getAwaiting().subscribe(accommodations => {
+      this.accommodations = accommodations;
     });
   }
 

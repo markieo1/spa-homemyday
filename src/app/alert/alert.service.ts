@@ -34,7 +34,19 @@ export class AlertService {
             input: 'textarea',
             showCancelButton: true,
             confirmButtonText: 'Yes',
-            cancelButtonText: 'No'
+            cancelButtonText: 'No',
+            // validator is optional
+            inputValidator: function (result) {
+                return new Promise(function (resolve, reject) {
+                    if (result) {
+                        resolve();
+                    } else {
+                        swal('Cancelled',
+                        'Please enter a reason!',
+                        'warning');
+                    }
+                });
+            }
         }).then((result) => {
             if (result.value) {
                 return result.value;
