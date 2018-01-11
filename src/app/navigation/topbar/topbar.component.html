@@ -9,8 +9,10 @@
     </a>
     <ul class="dropdown-menu dropdown-messages">
       <li>
-        <a routerLink="/login">
-          <i class="fa fa-sign-out fa-fw"></i> Logout</a>
+        <button (click)="logout()" class="noButtonLayout">
+          <a routerLink="/login" >
+            <i class="fa fa-sign-out fa-fw"></i> Logout</a>
+        </button>
       </li>
     </ul>
   </li>

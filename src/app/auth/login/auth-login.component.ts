@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm, FormGroup, NgModel } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { BaseComponent } from '../../shared/base/basecomponent.class';
-import { LoginModel } from './login.model';
+import { LoginModel } from './loginmodel.class';
 import { AlertService } from '../../alert/alert.service';
 import { AppComponent } from '../../app.component';
 
@@ -16,7 +16,6 @@ export class AuthLoginComponent extends BaseComponent implements OnInit {
 	public loading = false;
 	public loginModel: LoginModel;
 
-	@ViewChild('f')
 	private form: NgForm;
 
 	constructor(private alertService: AlertService, private authService: AuthService, private router: Router) {
@@ -25,7 +24,6 @@ export class AuthLoginComponent extends BaseComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.authService.logout();
 	}
 
 	onSubmit(form: NgForm) {

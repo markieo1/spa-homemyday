@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { BaseComponent } from './shared/base/basecomponent.class';
-import { Console } from '@angular/core/src/console';
 
 @Component({
 	selector: 'app-root',

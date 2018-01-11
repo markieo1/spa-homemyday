@@ -32,7 +32,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AuthRoutingModule
   ],
   providers: [
-    AuthService,
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,

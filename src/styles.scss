@@ -2,3 +2,8 @@
 @import 'variables';
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap';
 @import '~font-awesome/scss/font-awesome';
+
+.noButtonLayout {
+    background: none;
+    border: none;
+}

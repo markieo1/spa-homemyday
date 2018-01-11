@@ -4,14 +4,13 @@ import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpHelper } from '../shared/helpers/http.helper';
-import { Router } from '@angular/router';
 import { BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AuthService {
     private loggedInEmitter: BehaviorSubject<boolean>;
 
-    constructor(protected http: Http, private router: Router) {
+    constructor(protected http: Http) {
         this.loggedInEmitter = new BehaviorSubject(this.isLoggedIn());
     }
 
@@ -22,6 +21,9 @@ export class AuthService {
         return tokenNotExpired();
     }
 
+    /**
+    * returns a new BehaviorSubject
+    */
     loggedIn(): Observable<any> {
         return this.loggedInEmitter;
     }
