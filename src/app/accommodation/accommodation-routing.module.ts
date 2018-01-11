@@ -12,7 +12,7 @@ const routes: Routes = [
       { path: '', component: AccommodationOverviewComponent },
       { path: 'edit/:accommodationId', component: AccommodationEditComponent },
       {
-        path: 'accommodations/approve',
+        path: 'approve',
         component: AccommodationApproveComponent
       },
     ],

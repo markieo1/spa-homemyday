@@ -11,12 +11,34 @@ export class AlertService {
             title: 'Are you sure?',
             text: 'You will not be able to undo this action!',
             type: 'warning',
+            input: 'textarea',
             showCancelButton: true,
             confirmButtonText: 'Yes',
             cancelButtonText: 'No'
         }).then((result) => {
             if (result.value) {
                 return true;
+            } else {
+                return false;
+            }
+        });
+    }
+
+    /**
+      * Displays a approveing message to the admin
+      */
+    showApprove() {
+        return swal({
+            title: 'Are you sure?',
+            text: 'Please enter a reason!',
+            type: 'question',
+            input: 'textarea',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.value) {
+                return result.value;
             } else {
                 return false;
             }
