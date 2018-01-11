@@ -23,11 +23,6 @@ export class AccommodationService {
       .toArray();
   }
 
-  public getAccommodation(id: string): Observable<Accommodation> {
-    return this.authHttp.get(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
-      .map(r => new Accommodation(r));
-  }
-
   /**
   *Add a new accomodation
   * @param accommodation The object of the accommodation
