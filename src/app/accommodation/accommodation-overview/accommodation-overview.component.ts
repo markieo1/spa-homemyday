@@ -3,7 +3,6 @@ import { Accommodation } from '../accommodation.class';
 import { BaseComponent } from '../../shared/base/basecomponent.class';
 import { AccommodationService } from '../accommodation.service';
 import { AlertService } from '../../alert/alert.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-accommodation-overview',
@@ -15,7 +14,7 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
     */
   public accommodations: Accommodation[];
 
-  constructor(private router: Router, private accommodationService: AccommodationService, private alertService: AlertService) {
+  constructor(private accommodationService: AccommodationService, private alertService: AlertService) {
     super();
   }
 

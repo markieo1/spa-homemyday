@@ -54,7 +54,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
         } else {
           this.isNew = false;
           this.accommodationId = params['accommodationId'];
-          if (this.accommodationId != null && this.accommodationId.length > 0) {
+          if (this.accommodationId) {
             this.accomodationService.get(this.accommodationId)
               .subscribe((accommodation: Accommodation) => {
                 this.accommodation = accommodation;
@@ -78,8 +78,8 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     if (this.isNew) {
       this.accomodationService.create(this.accommodation).subscribe(() => {
         this.alertService.showSuccess('Accommodation successfully added.');
-          this.submitInProgress = false;
-          this.router.navigate(['/accommodations']);
+        this.submitInProgress = false;
+        this.router.navigate(['/accommodations']);
       }, error => {
         this.submitInProgress = false;
         this.alertService.showError('An error has occurred while creating a new accommodation.');
