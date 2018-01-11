@@ -3,23 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { AccommodationOverviewComponent } from './accommodation-overview/accommodation-overview.component';
 import { AccommodationEditComponent } from './accommodation-edit/accommodation-edit.component';
 import { AuthGuard } from '../auth/auth-guard.service';
+import { AccommodationComponent } from './accommodation.component';
 
 const routes: Routes = [
   {
-    path: 'accommodations',
-    component: AccommodationOverviewComponent,
+    path: 'accommodations', component: AccommodationComponent, children: [
+      { path: '', component: AccommodationOverviewComponent },
+      { path: 'new', component: AccommodationEditComponent },
+      { path: 'update/:accommodationId', component: AccommodationEditComponent }
+    ],
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'accommodations/new',
-    component: AccommodationEditComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'accommodations/:accommodationId',
-    component: AccommodationEditComponent,
-    canActivate: [AuthGuard]
-  },
+  }
 ];
 
 @NgModule({

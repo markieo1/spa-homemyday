@@ -47,6 +47,8 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     this.initForm();
     this.name = 'New Accommodations';
 
+    console.log('Initialized');
+
     this.route.params
       .subscribe((params: Params) => {
         this.editMode = params['accommodationId'] != null;
