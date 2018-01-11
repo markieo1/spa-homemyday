@@ -9,11 +9,13 @@ import { AccommodationEditComponent } from './accommodation-edit/accommodation-e
 import { AlertModule } from '../alert/alert.module';
 import { AuthModule } from '../auth/auth.module';
 import { AccommodationComponent } from './accommodation.component';
+import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
 
 @NgModule({
   declarations: [
     AccommodationComponent,
     AccommodationOverviewComponent,
+    AccommodationDetailComponent,
     AccommodationEditComponent,
     AccommodationComponent,
   ],

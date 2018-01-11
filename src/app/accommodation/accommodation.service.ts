@@ -21,6 +21,12 @@ export class AccommodationService {
       .arrayToTypescriptObject(Accommodation);
   }
 
+  public getAccommodation(id: string): Observable<Accommodation> {
+    return this.authHttp.get(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
+      .map(r => r.json())
+      .map(r => new Accommodation(r));
+  }
+
   /**
     * Gets an accommodation of the id
     * @param id The id of the accommodation
