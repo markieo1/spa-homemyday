@@ -9,6 +9,7 @@
           <tr>
             <th>Name</th>
             <th class="text-right">Price</th>
+            <th class="text-right">Price</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -16,6 +17,7 @@
           <tr *ngFor="let accommodation of accommodations; let i = index">
             <td>{{ accommodation.name }}</td>
             <td class="text-right">{{ accommodation.price }}</td>
+            <td class="text-right">{{ accommodation.approveStatus.status }}</td>
             <td><button type="button" class="btn btn-warning" (click)="onAccommodationDeleteClick(accommodation.id)">Delete</button></td>
           </tr>
         </tbody>
