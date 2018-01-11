@@ -5,6 +5,7 @@ import { Accommodation } from '../accommodation.class';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AlertService } from '../../alert/alert.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-accommodation-edit',
@@ -36,7 +37,11 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     */
   public submitInProgress: boolean;
 
-  constructor(private route: ActivatedRoute, private accomodationService: AccommodationService, private router: Router, private alertService: AlertService) {
+  constructor(private location: Location,
+              private route: ActivatedRoute,
+              private accomodationService: AccommodationService,
+              private router: Router,
+              private alertService: AlertService) {
     super();
     this.accommodation = new Accommodation();
   }
@@ -59,6 +64,9 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
               .subscribe((accommodation: Accommodation) => {
                 this.accommodation = accommodation;
                 this.fillForm(accommodation);
+              }, error => {
+                this.alertService.showError('An error has occurred while retrieving the accommodation.');
+                this.location.back();
               });
           }
         }
