@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccommodationEditComponent } from './accommodation-edit/accommodation-edit.component';
 import { AlertModule } from '../alert/alert.module';
 import { AuthModule } from '../auth/auth.module';
+import { AccommodationApproveComponent } from './accommodation-approve/accommodation-approve.component';
 import { AccommodationComponent } from './accommodation.component';
 import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
 
@@ -15,6 +16,7 @@ import { AccommodationDetailComponent } from './accommodation-detail/accommodati
   declarations: [
     AccommodationComponent,
     AccommodationOverviewComponent,
+    AccommodationApproveComponent,
     AccommodationDetailComponent,
     AccommodationEditComponent,
     AccommodationComponent,

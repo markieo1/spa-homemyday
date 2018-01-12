@@ -21,6 +21,15 @@ export class AccommodationService {
       .arrayToTypescriptObject(Accommodation);
   }
 
+  /**
+    * Gets all awaiting the accommodations
+    */
+  public getAwaiting(): Observable<Accommodation[]> {
+    return this.authHttp.get(`${environment.apiUrl}/accommodations/awaiting`, HttpHelper.getRequestOptions())
+      .map(r => r.json())
+      .arrayToTypescriptObject(Accommodation);
+  }
+
   public getAccommodation(id: string): Observable<Accommodation> {
     return this.authHttp.get(`${environment.apiUrl}/accommodations/${id}`, HttpHelper.getRequestOptions())
       .map(r => r.json())

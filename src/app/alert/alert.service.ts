@@ -24,6 +24,39 @@ export class AlertService {
     }
 
     /**
+      * Displays a approveing message to the admin
+      */
+    showApprove() {
+        return swal({
+            title: 'Are you sure?',
+            text: 'Please enter a reason!',
+            type: 'question',
+            input: 'textarea',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            // validator is optional
+            inputValidator: function (result) {
+                return new Promise(function (resolve, reject) {
+                    if (result) {
+                        resolve();
+                    } else {
+                        swal('Cancelled',
+                        'Please enter a reason!',
+                        'warning');
+                    }
+                });
+            }
+        }).then((result) => {
+            if (result.value) {
+                return result.value;
+            } else {
+                return false;
+            }
+        });
+    }
+
+    /**
       * Displays a succesfull message to the user
       * @param text The text of the success message
       */

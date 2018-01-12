@@ -1,6 +1,13 @@
 import { BaseModel } from '../shared/base/basemodel.class';
 
+export enum ApproveStatus {
+  Awaiting = 'Awaiting',
+  Approved = 'Approved',
+  Rejected = 'Rejected'
+}
+
 export class Accommodation extends BaseModel {
+
   name: string;
   description: string;
   maxPersons: number;
@@ -18,6 +25,10 @@ export class Accommodation extends BaseModel {
   pricesText: string;
   rulesText: string;
   cancellationText: string;
+  approveStatus: {
+    status: ApproveStatus,
+    reason: string
+  };
 
   constructor(json?: any) {
     super(json);
