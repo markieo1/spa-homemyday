@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://homemydaynode.azurewebsites.net/api/v1/'
+  apiUrl: 'http://95.85.48.154/api/v1/'
 };
