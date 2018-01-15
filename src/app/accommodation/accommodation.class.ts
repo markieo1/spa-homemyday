@@ -29,6 +29,7 @@ export class Accommodation extends BaseModel {
     status: ApproveStatus,
     reason: string
   };
+  images: string[];
 
   constructor(json?: any) {
     super(json);

@@ -12,6 +12,7 @@ import { AccommodationApproveComponent } from './accommodation-approve/accommoda
 import { AccommodationComponent } from './accommodation.component';
 import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
 import { DropzoneWrapperModule } from '../shared/dropzone-wrapper/dropzone-wrapper.module';
+import { UICarouselModule } from 'ui-carousel';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DropzoneWrapperModule } from '../shared/dropzone-wrapper/dropzone-wrapp
     AuthModule,
     AccommodationRoutingModule,
     AlertModule,
-    DropzoneWrapperModule
+    DropzoneWrapperModule,
+    UICarouselModule
   ],
   providers: [
     AccommodationService

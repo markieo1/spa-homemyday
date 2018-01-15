@@ -47,6 +47,7 @@
     "sweetalert2": "^7.3.5",
     "tslint": "^5.8.0",
     "typescript": "~2.4.2",
+    "ui-carousel": "^0.1.9",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
