@@ -86,7 +86,8 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
               method: 'POST',
               headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
-              }
+              },
+              addRemoveLinks: true
             };
           }
         }
@@ -130,6 +131,14 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     */
   public onUploadError($event) {
     this.alertService.showError($event[1].error);
+  }
+
+  /**
+    * Called when a file is removed
+    */
+  public onRemoveFile($event) {
+    // TODO: Make the remove call
+    const fileUrl = $event.url;
   }
 
   /**
@@ -195,7 +204,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
       // Create the mock file
       const lastSlashIndex = image.lastIndexOf('/');
       const fileName = image.substring(lastSlashIndex + 1);
-      const mockFile = { name: fileName, size: 0, url: image };
+      const mockFile = { name: fileName, size: 0, dataURL: image };
 
       // Call the default addedfile event handler
       dropzone.emit('addedfile', mockFile);
@@ -203,7 +212,10 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
       // Or if the file on your server is not yet in the right
       // size, you can let Dropzone download and resize it
       // callback and crossOrigin are optional.
-      dropzone.createThumbnailFromUrl(mockFile, image);
+      dropzone.createThumbnailFromUrl(mockFile, dropzone.options.thumbnailWidth, dropzone.options.thumbnailHeight,
+        dropzone.options.thumbnailMethod, true, (thumbnail) => {
+          dropzone.emit('thumbnail', mockFile, thumbnail);
+        }, 'anonymous');
 
       dropzone.emit('complete', mockFile);
     });
