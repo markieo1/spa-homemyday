@@ -157,7 +157,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
       'longitude': accommodation.longitude || '',
       'rooms': accommodation.rooms || 0,
       'beds': accommodation.beds || 0,
-      'price': accommodation.price || '',
+      'price': accommodation.price || 0,
       'spaceText': accommodation.spaceText || '',
       'servicesText': accommodation.servicesText || '',
       'pricesText': accommodation.pricesText || '',
