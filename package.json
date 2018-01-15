@@ -41,6 +41,7 @@
     "jquery": "^3.2.1",
     "metismenu": "^2.7.2",
     "morris.js": "^0.5.0",
+    "ngx-dropzone-wrapper": "^5.3.1",
     "raphael": "^2.2.7",
     "rxjs": "^5.5.2",
     "sweetalert2": "^7.3.5",

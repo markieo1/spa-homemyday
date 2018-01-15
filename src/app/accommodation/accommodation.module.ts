@@ -11,6 +11,7 @@ import { AuthModule } from '../auth/auth.module';
 import { AccommodationApproveComponent } from './accommodation-approve/accommodation-approve.component';
 import { AccommodationComponent } from './accommodation.component';
 import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
+import { DropzoneWrapperModule } from '../shared/dropzone-wrapper/dropzone-wrapper.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AccommodationDetailComponent } from './accommodation-detail/accommodati
     ReactiveFormsModule,
     AuthModule,
     AccommodationRoutingModule,
-    AlertModule
+    AlertModule,
+    DropzoneWrapperModule
   ],
   providers: [
     AccommodationService

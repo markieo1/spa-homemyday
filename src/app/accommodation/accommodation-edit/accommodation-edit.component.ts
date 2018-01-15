@@ -6,6 +6,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AlertService } from '../../alert/alert.service';
 import { Location } from '@angular/common';
+import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-accommodation-edit',
@@ -37,11 +39,16 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     */
   public submitInProgress: boolean;
 
+  /**
+    * The config used for dropzone
+    */
+  public dropzoneConfig: DropzoneConfigInterface;
+
   constructor(private location: Location,
-              private route: ActivatedRoute,
-              private accomodationService: AccommodationService,
-              private router: Router,
-              private alertService: AlertService) {
+    private route: ActivatedRoute,
+    private accomodationService: AccommodationService,
+    private router: Router,
+    private alertService: AlertService) {
     super();
     this.accommodation = new Accommodation();
   }
@@ -70,6 +77,14 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
               });
           }
         }
+
+        this.dropzoneConfig = {
+          url: `${environment.apiUrl}/accommodations/${this.accommodationId}/images`,
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        };
       });
   }
 
@@ -106,6 +121,13 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
   }
 
   /**
+    * Called when the upload has an error
+    */
+  public onUploadError($event) {
+    this.alertService.showError($event[1].error);
+  }
+
+  /**
     * Sets the value of the accommodation form
     * @param accommodation The object of accommodation
     */
@@ -135,23 +157,23 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     * @param accommodation The accommodation object
     */
   private initForm() {
-      this.accommodationForm = new FormGroup({
-        'name': new FormControl('', Validators.required),
-        'description': new FormControl(''),
-        'maxPersons': new FormControl(0, Validators.required),
-        'continent': new FormControl(''),
-        'country': new FormControl(''),
-        'location': new FormControl(''),
-        'latitude': new FormControl(''),
-        'longitude': new FormControl(''),
-        'rooms': new FormControl(0),
-        'beds': new FormControl(0),
-        'price': new FormControl('0', Validators.required),
-        'spaceText': new FormControl(''),
-        'servicesText': new FormControl(''),
-        'pricesText': new FormControl(''),
-        'rulesText': new FormControl(''),
-        'cancellationText': new FormControl('')
-      });
+    this.accommodationForm = new FormGroup({
+      'name': new FormControl('', Validators.required),
+      'description': new FormControl(''),
+      'maxPersons': new FormControl(0, Validators.required),
+      'continent': new FormControl(''),
+      'country': new FormControl(''),
+      'location': new FormControl(''),
+      'latitude': new FormControl(''),
+      'longitude': new FormControl(''),
+      'rooms': new FormControl(0),
+      'beds': new FormControl(0),
+      'price': new FormControl('0', Validators.required),
+      'spaceText': new FormControl(''),
+      'servicesText': new FormControl(''),
+      'pricesText': new FormControl(''),
+      'rulesText': new FormControl(''),
+      'cancellationText': new FormControl('')
+    });
   }
 }
