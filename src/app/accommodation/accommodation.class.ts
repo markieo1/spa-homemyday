@@ -19,7 +19,7 @@ export class Accommodation extends BaseModel {
   rooms: number;
   beds: number;
   recommended: boolean;
-  price: string;
+  price: number;
   spaceText: string;
   servicesText: string;
   pricesText: string;
