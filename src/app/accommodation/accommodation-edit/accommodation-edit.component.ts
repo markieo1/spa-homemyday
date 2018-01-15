@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../shared/base/basecomponent.class';
 import { AccommodationService } from '../accommodation.service';
 import { Accommodation } from '../accommodation.class';
@@ -8,6 +8,7 @@ import { AlertService } from '../../alert/alert.service';
 import { Location } from '@angular/common';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { environment } from '../../../environments/environment';
+import { DropzoneComponent } from 'ngx-dropzone-wrapper';
 
 @Component({
   selector: 'app-accommodation-edit',
@@ -44,6 +45,9 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     */
   public dropzoneConfig: DropzoneConfigInterface;
 
+  @ViewChild(DropzoneComponent)
+  public dropzoneComponent: DropzoneComponent;
+
   constructor(private location: Location,
     private route: ActivatedRoute,
     private accomodationService: AccommodationService,
@@ -71,20 +75,21 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
               .subscribe((accommodation: Accommodation) => {
                 this.accommodation = accommodation;
                 this.fillForm(accommodation);
+                this.fillAlreadyUploadedImages();
               }, error => {
                 this.alertService.showError('An error has occurred while retrieving the accommodation.');
                 this.location.back();
               });
+
+            this.dropzoneConfig = {
+              url: `${environment.apiUrl}/accommodations/${this.accommodationId}/images`,
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+              }
+            };
           }
         }
-
-        this.dropzoneConfig = {
-          url: `${environment.apiUrl}/accommodations/${this.accommodationId}/images`,
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        };
       });
   }
 
@@ -174,6 +179,33 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
       'pricesText': new FormControl(''),
       'rulesText': new FormControl(''),
       'cancellationText': new FormControl('')
+    });
+  }
+
+  /**
+    * Fill the already uploaded images
+    */
+  private fillAlreadyUploadedImages() {
+    if (!this.accommodation || !this.accommodation.images) {
+      return;
+    }
+
+    const dropzone = this.dropzoneComponent.directiveRef.dropzone();
+    this.accommodation.images.forEach(image => {
+      // Create the mock file
+      const lastSlashIndex = image.lastIndexOf('/');
+      const fileName = image.substring(lastSlashIndex + 1);
+      const mockFile = { name: fileName, size: 0, url: image };
+
+      // Call the default addedfile event handler
+      dropzone.emit('addedfile', mockFile);
+
+      // Or if the file on your server is not yet in the right
+      // size, you can let Dropzone download and resize it
+      // callback and crossOrigin are optional.
+      dropzone.createThumbnailFromUrl(mockFile, image);
+
+      dropzone.emit('complete', mockFile);
     });
   }
 }
