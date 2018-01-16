@@ -37,7 +37,7 @@ export class AccommodationApproveComponent extends BaseComponent implements OnIn
           const rejectedAccommodation = accommodation;
           rejectedAccommodation.approveStatus.status = ApproveStatus.Rejected;
           rejectedAccommodation.approveStatus.reason = confirmed;
-          this.subscription = this.accommodationService.update(rejectedAccommodation)
+          this.subscription = this.accommodationService.updateApproval(rejectedAccommodation)
             .subscribe((resp) => {
               const index = this.accommodations.findIndex(x => x.id === accommodation.id);
               this.accommodations.splice(index, 1);
@@ -60,7 +60,7 @@ export class AccommodationApproveComponent extends BaseComponent implements OnIn
           const approvedAccommodation = accommodation;
           approvedAccommodation.approveStatus.status = ApproveStatus.Approved;
           approvedAccommodation.approveStatus.reason = confirmed;
-          this.subscription = this.accommodationService.update(approvedAccommodation)
+          this.subscription = this.accommodationService.updateApproval(approvedAccommodation)
             .subscribe((resp) => {
               const index = this.accommodations.findIndex(x => x.id === accommodation.id);
               this.accommodations.splice(index, 1);
