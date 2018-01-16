@@ -48,6 +48,8 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
   @ViewChild(DropzoneComponent)
   public dropzoneComponent: DropzoneComponent;
 
+  private fileQueue: any[];
+
   constructor(private location: Location,
     private route: ActivatedRoute,
     private accomodationService: AccommodationService,
@@ -55,6 +57,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     private alertService: AlertService) {
     super();
     this.accommodation = new Accommodation();
+    this.fileQueue = [];
   }
 
   ngOnInit() {
@@ -142,6 +145,62 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
   public onRemoveFile($event) {
     // TODO: Make the remove call
     const fileUrl = $event.url;
+  }
+
+  public onAddFile(file) {
+    if (!file) {
+      return;
+    }
+
+    const isNew = file.size !== 0;
+
+    if (!isNew) {
+      return;
+    }
+
+    this.fileQueue.push(file);
+
+    this.handleAddedFiles();
+  }
+
+  public onSendingFile($event) {
+    const file = $event[0];
+    const formData = $event[2];
+    formData.append('title', file.title);
+  }
+
+  private handleAddedFiles() {
+    if (this.fileQueue.length === 0) {
+      // No files remaining
+      return;
+    }
+
+    if (this.alertService.isShown()) {
+      // We are already displaying the input alert
+      return;
+    }
+
+    const file = this.fileQueue[0];
+    const dropzone = this.dropzoneComponent.directiveRef.dropzone();
+
+    // Show a dialog to add the extra information
+    this.alertService.showInputAlert('Image Title', `Enter a title for this image: ${file.name}`, 'text').then((title) => {
+
+      file.title = title;
+      dropzone.enqueueFile(file);
+      this.fileQueue.splice(this.fileQueue.findIndex((f) => f.upload.uuid === file.upload.uuid), 1);
+
+      setTimeout(() => {
+        this.handleAddedFiles();
+      }, 800);
+    }, () => {
+      dropzone.removeFile(file);
+
+      this.fileQueue.splice(this.fileQueue.findIndex((f) => f.upload.uuid === file.upload.uuid), 1);
+      setTimeout(() => {
+        this.handleAddedFiles();
+      }, 800);
+    });
   }
 
   /**

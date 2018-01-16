@@ -68,7 +68,7 @@
         <label for="cancellationText">Cancellation:</label>
         <textarea type="text" class="form-control" formControlName="cancellationText" [(ngModel)]="accommodation.cancellationText"></textarea>
       </div>
-      <dropzone *ngIf="!isNew" [disabled]="isNew" [config]="dropzoneConfig" (error)="onUploadError($event)" (removedFile)="onRemoveFile($event)"></dropzone>
+      <dropzone *ngIf="!isNew" [disabled]="isNew" [config]="dropzoneConfig" (error)="onUploadError($event)" (removedFile)="onRemoveFile($event)" (addedFile)="onAddFile($event)" (sending)="onSendingFile($event)"></dropzone>
       <button type="submit" class="btn btn-success" [disabled]="!accommodationForm.valid || submitInProgress">Save</button>
       <button type="button" class="btn btn-danger" routerLink="../../">Cancel</button>
     </form>

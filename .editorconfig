@@ -4,18 +4,13 @@ root = true
 [*]
 charset = utf-8
 indent_style = space
-indent_size = 2
 insert_final_newline = true
 trim_trailing_whitespace = true
 
 [src/assets/**]
-indent_size = ignore
 indent_style = ignore
 insert_final_newline = ignore
 trim_trailing_whitespace = ignore
-
-[src/polyfills.ts]
-indent_size = ignore
 
 [*.md]
 max_line_length = off
