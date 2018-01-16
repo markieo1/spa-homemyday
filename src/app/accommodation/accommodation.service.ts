@@ -90,7 +90,7 @@ export class AccommodationService {
    * @param imageId The id of the image
    */
   public removeImage(accommodationId: string, imageId: string) {
-    return this.authHttp.get(`${environment.apiUrl}/accommodations/${accommodationId}/images/${imageId}`, HttpHelper.getRequestOptions())
+    return this.authHttp.delete(`${environment.apiUrl}/accommodations/${accommodationId}/images/${imageId}`, HttpHelper.getRequestOptions())
       .map(r => r.json());
   }
 }
