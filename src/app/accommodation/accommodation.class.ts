@@ -32,6 +32,7 @@ export class Accommodation extends BaseModel {
   images: [{
     uuid: string,
     filename: string,
+    fileSize: number,
     title: string
   }];
 
