@@ -222,6 +222,11 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     const receivedObject = $event[1];
 
     file.uuid = receivedObject.uuid;
+
+    // Hacky way to remove the file
+    // See https://github.com/enyo/dropzone/issues/1399
+    const dropzone = this.dropzoneComponent.directiveRef.dropzone();
+    (dropzone.files as any[]).splice((dropzone.files as any[]).findIndex(x => x.uuid === receivedObject.uuid), 1);
   }
 
   /**
@@ -282,23 +287,28 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
       return;
     }
 
-    const dropzone = this.dropzoneComponent.directiveRef.dropzone();
     this.accommodation.images.forEach(image => {
       // Create the mock file
-      const mockFile = { name: image.title, size: image.fileSize, dataURL: `${environment.apiUrl}images/${image.filename}`, uuid: image.uuid };
-
-      // Call the default addedfile event handler
-      dropzone.emit('addedfile', mockFile);
-
-      // Or if the file on your server is not yet in the right
-      // size, you can let Dropzone download and resize it
-      // callback and crossOrigin are optional.
-      dropzone.createThumbnailFromUrl(mockFile, dropzone.options.thumbnailWidth, dropzone.options.thumbnailHeight,
-        dropzone.options.thumbnailMethod, true, (thumbnail) => {
-          dropzone.emit('thumbnail', mockFile, thumbnail);
-        }, 'anonymous');
-
-      dropzone.emit('complete', mockFile);
+      this.createMockFile(image);
     });
+  }
+
+  private createMockFile(image) {
+    const dropzone = this.dropzoneComponent.directiveRef.dropzone();
+
+    const mockFile = { name: image.title, size: image.fileSize, dataURL: `${environment.apiUrl}images/${image.filename}`, uuid: image.uuid };
+
+    // Call the default addedfile event handler
+    dropzone.emit('addedfile', mockFile);
+
+    // Or if the file on your server is not yet in the right
+    // size, you can let Dropzone download and resize it
+    // callback and crossOrigin are optional.
+    dropzone.createThumbnailFromUrl(mockFile, dropzone.options.thumbnailWidth, dropzone.options.thumbnailHeight,
+      dropzone.options.thumbnailMethod, true, (thumbnail) => {
+        dropzone.emit('thumbnail', mockFile, thumbnail);
+      }, 'anonymous');
+
+    dropzone.emit('complete', mockFile);
   }
 }
