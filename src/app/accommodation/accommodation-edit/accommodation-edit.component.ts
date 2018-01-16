@@ -264,9 +264,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     const dropzone = this.dropzoneComponent.directiveRef.dropzone();
     this.accommodation.images.forEach(image => {
       // Create the mock file
-      const lastSlashIndex = image.lastIndexOf('/');
-      const fileName = image.substring(lastSlashIndex + 1);
-      const mockFile = { name: fileName, size: 0, dataURL: `${environment.apiUrl}\\${image}` };
+      const mockFile = { name: image.title, size: 0, dataURL: `${environment.apiUrl}images/${image.uuid}` };
 
       // Call the default addedfile event handler
       dropzone.emit('addedfile', mockFile);

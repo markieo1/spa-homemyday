@@ -8,7 +8,7 @@
       <ui-carousel [infinite]="accommodation.images.length > 1" [fade]="false" [speed]="200"
         height="300px">
         <ui-carousel-item *ngFor="let item of accommodation.images">
-          <img [ui-lazy-load]="item">
+          <img [ui-lazy-load]="apiUrl + 'images/' + item.uuid">
         </ui-carousel-item>
       </ui-carousel>
     </div>

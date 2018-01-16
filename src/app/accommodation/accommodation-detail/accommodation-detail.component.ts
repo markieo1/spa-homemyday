@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AccommodationService } from '../accommodation.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Accommodation } from '../accommodation.class';
 import { BaseComponent } from '../../shared/base/basecomponent.class';
 import { AlertService } from '../../alert/alert.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-accommodation-detail',
@@ -12,6 +12,8 @@ import { AlertService } from '../../alert/alert.service';
 })
 export class AccommodationDetailComponent extends BaseComponent implements OnInit, OnDestroy {
   public accommodation: Accommodation;
+
+  public apiUrl = environment.apiUrl;
 
   constructor(private serviceAccommodation: AccommodationService,
               private serviceAlert: AlertService,
