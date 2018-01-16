@@ -67,9 +67,9 @@ export class AccommodationService {
   }
 
   public updateApproval(accommodation: Accommodation): Observable<Accommodation> {
-    return this.authHttp.put(`${environment.apiUrl}/accommodation/${accommodation.id}/approval`, accommodation, HttpHelper.getRequestOptions())
-      .map(r => r.json())
-      .map(r => new Accommodation(r));
+    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodation.id}/approval`, accommodation, HttpHelper.getRequestOptions())
+    .map(r => r.json())
+    .map(r => new Accommodation(r));
   }
 
   /**
