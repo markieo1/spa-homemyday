@@ -66,6 +66,12 @@ export class AccommodationService {
       .map(r => new Accommodation(r));
   }
 
+  public updateApproval(accommodation: Accommodation): Observable<Accommodation> {
+    return this.authHttp.put(`${environment.apiUrl}/accommodation/${accommodation.id}/approve`, accommodation)
+      .map(r => r.json())
+      .map(r => new Accommodation(r));
+  }
+
   /**
     * Deletes an accommodation of the id
     * @param id The id of the accommodation
