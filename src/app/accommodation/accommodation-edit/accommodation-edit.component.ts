@@ -198,7 +198,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     // Show a dialog to add the extra information
     this.alertService.showInputAlert('Image Title', `Enter a title for this image: ${file.name}`, 'text').then((title) => {
       // Change the preview element
-      $('[data-dz-name]', file.previewElement).text(title as string);
+      jQuery('[data-dz-name]', file.previewElement).text(title as string);
 
       file.title = title;
       dropzone.enqueueFile(file);
