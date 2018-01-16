@@ -114,6 +114,9 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
         this.alertService.showError('An error has occurred while creating a new accommodation.');
       });
     } else {
+      const dropzone = this.dropzoneComponent.directiveRef.dropzone();
+      dropzone.processQueue();
+
       this.accomodationService.update(this.accommodation)
         .subscribe(() => {
           this.alertService.showSuccess('Accommodation successfully updated.');
@@ -204,7 +207,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
       // Create the mock file
       const lastSlashIndex = image.lastIndexOf('/');
       const fileName = image.substring(lastSlashIndex + 1);
-      const mockFile = { name: fileName, size: 0, dataURL: image };
+      const mockFile = { name: fileName, size: 0, dataURL: `${environment.apiUrl}\{image}` };
 
       // Call the default addedfile event handler
       dropzone.emit('addedfile', mockFile);
