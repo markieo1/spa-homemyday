@@ -4,9 +4,7 @@ import { DropzoneModule, DropzoneConfigInterface, DROPZONE_CONFIG } from 'ngx-dr
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
-  acceptedFiles: 'image/*',
-  autoProcessQueue: false,
-  uploadMultiple: true
+  acceptedFiles: 'image/*'
 };
 
 @NgModule({

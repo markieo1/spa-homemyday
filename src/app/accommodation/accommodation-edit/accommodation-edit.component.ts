@@ -207,7 +207,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
       // Create the mock file
       const lastSlashIndex = image.lastIndexOf('/');
       const fileName = image.substring(lastSlashIndex + 1);
-      const mockFile = { name: fileName, size: 0, dataURL: `${environment.apiUrl}\{image}` };
+      const mockFile = { name: fileName, size: 0, dataURL: `${environment.apiUrl}\\${image}` };
 
       // Call the default addedfile event handler
       dropzone.emit('addedfile', mockFile);
