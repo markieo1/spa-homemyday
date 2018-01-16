@@ -150,10 +150,8 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     const isServerLoaded = file.size === 0;
 
     if (isServerLoaded) {
-      const lastSlash = file.dataURL.lastIndexOf('/');
-      const fileName = (file.dataURL as string).substring(lastSlash + 1);
-
-      this.accomodationService.removeImage(this.accommodationId, fileName).subscribe(() => {
+      const uuid = file.uuid;
+      this.accomodationService.removeImage(this.accommodationId, uuid).subscribe(() => {
         this.alertService.showSuccess('Image deleted!');
       }, () => {
         this.alertService.showError('An error has occurred while deleting the image.');
@@ -278,7 +276,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     const dropzone = this.dropzoneComponent.directiveRef.dropzone();
     this.accommodation.images.forEach(image => {
       // Create the mock file
-      const mockFile = { name: image.title, size: 0, dataURL: `${environment.apiUrl}images/${image.filename}` };
+      const mockFile = { name: image.title, size: 0, dataURL: `${environment.apiUrl}images/${image.filename}`, uuid: image.uuid };
 
       // Call the default addedfile event handler
       dropzone.emit('addedfile', mockFile);
