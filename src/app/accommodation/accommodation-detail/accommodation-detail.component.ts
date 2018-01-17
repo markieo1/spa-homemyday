@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AccommodationService } from '../accommodation.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Accommodation } from '../accommodation.class';
@@ -11,7 +11,7 @@ import { Image } from '../../image/image.class';
   selector: 'app-accommodation-detail',
   templateUrl: 'accommodation-detail.component.html',
 })
-export class AccommodationDetailComponent extends BaseComponent implements OnInit, OnDestroy {
+export class AccommodationDetailComponent extends BaseComponent implements OnInit {
   public accommodation: Accommodation;
 
   constructor(private serviceAccommodation: AccommodationService,
@@ -44,6 +44,9 @@ export class AccommodationDetailComponent extends BaseComponent implements OnIni
     return `${environment.apiUrl}images/${image.filename}`;
   }
 
+  /**
+   * Redirects the user to the accommodation overview
+   */
   public backToOverview(): void {
     this.router.navigate(['/accommodations']);
   }
