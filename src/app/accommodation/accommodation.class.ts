@@ -27,8 +27,8 @@ export class Accommodation extends BaseModel {
   rulesText: string;
   cancellationText: string;
   approveStatus: {
-    status: ApproveStatus,
-    reason: string
+    status: ApproveStatus;
+    reason: string;
   };
   images: [Image];
 

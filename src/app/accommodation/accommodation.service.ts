@@ -51,7 +51,7 @@ export class AccommodationService {
     * @param accommodation The object of the accommodation
     */
   public create(accommodation: Accommodation): Observable<Accommodation> {
-    return this.authHttp.post(`${environment.apiUrl}/accommodations`, accommodation)
+    return this.authHttp.post(`${environment.apiUrl}/accommodations`, accommodation, HttpHelper.getRequestOptions())
       .map(r => r.json())
       .map(r => new Accommodation(r));
   }
@@ -61,9 +61,15 @@ export class AccommodationService {
     * @param accommodation The object of the accommodation
     */
   public update(accommodation: Accommodation): Observable<Accommodation> {
-    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodation.id}`, accommodation)
+    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodation.id}`, accommodation, HttpHelper.getRequestOptions())
       .map(r => r.json())
       .map(r => new Accommodation(r));
+  }
+
+  public updateApproval(accommodation: Accommodation): Observable<Accommodation> {
+    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodation.id}/approval`, accommodation, HttpHelper.getRequestOptions())
+    .map(r => r.json())
+    .map(r => new Accommodation(r));
   }
 
   /**
