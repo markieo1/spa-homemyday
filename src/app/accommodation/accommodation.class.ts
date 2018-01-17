@@ -1,4 +1,5 @@
 import { BaseModel } from '../shared/base/basemodel.class';
+import { Image } from '../image/image.class';
 
 export enum ApproveStatus {
   Awaiting = 'Awaiting',
@@ -29,12 +30,7 @@ export class Accommodation extends BaseModel {
     status: ApproveStatus,
     reason: string
   };
-  images: [{
-    uuid: string,
-    filename: string,
-    fileSize: number,
-    title: string
-  }];
+  images: [Image];
 
   constructor(json?: any) {
     super(json);
