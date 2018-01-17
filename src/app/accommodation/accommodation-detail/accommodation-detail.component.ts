@@ -5,6 +5,7 @@ import { Accommodation } from '../accommodation.class';
 import { BaseComponent } from '../../shared/base/basecomponent.class';
 import { AlertService } from '../../alert/alert.service';
 import { environment } from '../../../environments/environment';
+import { Image } from '../../image/image.class';
 
 @Component({
   selector: 'app-accommodation-detail',
@@ -13,12 +14,10 @@ import { environment } from '../../../environments/environment';
 export class AccommodationDetailComponent extends BaseComponent implements OnInit, OnDestroy {
   public accommodation: Accommodation;
 
-  public apiUrl = environment.apiUrl;
-
   constructor(private serviceAccommodation: AccommodationService,
-              private serviceAlert: AlertService,
-              private aRoute: ActivatedRoute,
-              private router: Router) {
+    private serviceAlert: AlertService,
+    private aRoute: ActivatedRoute,
+    private router: Router) {
     super();
   }
 
@@ -32,9 +31,17 @@ export class AccommodationDetailComponent extends BaseComponent implements OnIni
           }, (error) => {
             this.serviceAlert.showError('An error has occurred while viewing a existing accommodation.');
             this.backToOverview();
-        });
+          });
       }
     );
+  }
+
+  /**
+   * Gets an image url for the specified image
+   * @param image The image object to get the url for
+   */
+  public getImageUrl(image: Image): string {
+    return `${environment.apiUrl}images/${image.filename}`;
   }
 
   public backToOverview(): void {
