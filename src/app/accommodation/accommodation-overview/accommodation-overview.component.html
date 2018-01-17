@@ -19,7 +19,7 @@
             <td><a [routerLink]="[accommodation.id]">{{ accommodation.name }}</a></td>
             <td class="text-right">{{ accommodation.price }}</td>
             <td class="text-right">{{ accommodation.approveStatus.status }}
-              <div *ngIf="accommodation.approveStatus.reason && accommodation.approveStatus.reason.length > 0">
+              <div *ngIf="accommodation.approveStatus.reason">
                 <br/>Reason: {{ accommodation.approveStatus.reason }}
               </div>
             </td>
