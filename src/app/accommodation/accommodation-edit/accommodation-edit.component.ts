@@ -46,9 +46,15 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     */
   public dropzoneConfig: DropzoneConfigInterface;
 
+  /**
+   * The child dropzone component
+   */
   @ViewChild(DropzoneComponent)
   public dropzoneComponent: DropzoneComponent;
 
+  /**
+   * An queue of files to be asked for the title of them
+   */
   private fileQueue: any[];
 
   constructor(private location: Location,
@@ -99,8 +105,8 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
   }
 
   /**
-    * Saves a new or updated accommodation
-    */
+   * Saves a new or updated accommodation
+   */
   public onSubmit() {
     if (!this.accommodationForm.valid) {
       return;
@@ -134,15 +140,15 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
   }
 
   /**
-    * Called when the upload has an error
-    */
+   * Called when the upload has an error
+   */
   public onUploadError($event) {
     this.alertService.showError($event[1].error);
   }
 
   /**
-    * Called when a file is removed
-    */
+   * Called when a file is removed
+   */
   public onRemoveFile(file) {
     if (!file) {
       return;
@@ -152,7 +158,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
 
     if (canDelete) {
       const uuid = file.uuid;
-      this.accomodationService.removeImage(this.accommodationId, uuid).subscribe(() => {
+      this.subscription = this.accomodationService.removeImage(this.accommodationId, uuid).subscribe(() => {
         this.alertService.showSuccess('Image deleted!');
       }, () => {
         this.alertService.showError('An error has occurred while deleting the image.');
@@ -160,6 +166,10 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     }
   }
 
+  /**
+   * Called when a file is added to dropzone
+   * @param file The file that has been added
+   */
   public onAddFile(file) {
     if (!file) {
       return;
@@ -167,6 +177,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
 
     const isNew = file.uuid == null;
 
+    // We only want to ask for a title if we know the image isn't coming from the server
     if (!isNew) {
       return;
     }
@@ -176,51 +187,22 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     this.handleAddedFiles();
   }
 
+  /**
+   * Called when the dropzone starts sending the file to the server.
+   * We add the title in the formData here.
+   * @param $event The args of the event
+   */
   public onSendingFile($event) {
-    const file = $event[0];
-    const formData = $event[2];
+    const [file, xhr, formData] = $event;
     formData.append('title', file.title);
   }
 
-  private handleAddedFiles() {
-    if (this.fileQueue.length === 0) {
-      // No files remaining
-      return;
-    }
-
-    if (this.alertService.isShown()) {
-      // We are already displaying the input alert
-      return;
-    }
-
-    const file = this.fileQueue[0];
-    const dropzone = this.dropzoneComponent.directiveRef.dropzone();
-
-    // Show a dialog to add the extra information
-    this.alertService.showInputAlert('Image Title', `Enter a title for this image: ${file.name}`, 'text').then((title) => {
-      // Change the preview element
-      $('[data-dz-name]', file.previewElement).text(title as string);
-
-      file.title = title;
-      dropzone.enqueueFile(file);
-      this.fileQueue.splice(this.fileQueue.findIndex((f) => f.upload.uuid === file.upload.uuid), 1);
-
-      setTimeout(() => {
-        this.handleAddedFiles();
-      }, 800);
-    }, () => {
-      dropzone.removeFile(file);
-
-      this.fileQueue.splice(this.fileQueue.findIndex((f) => f.upload.uuid === file.upload.uuid), 1);
-      setTimeout(() => {
-        this.handleAddedFiles();
-      }, 800);
-    });
-  }
-
+  /**
+   * Called when a file is uploaded succesfully
+   * @param $event The args of the event
+   */
   public onSuccess($event) {
-    const file = $event[0];
-    const receivedObject = $event[1];
+    const [file, receivedObject] = $event;
 
     file.uuid = receivedObject.uuid;
 
@@ -281,7 +263,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
   }
 
   /**
-    * Fill the already uploaded images
+    * Fills the already uploaded images
     */
   private fillAlreadyUploadedImages() {
     if (!this.accommodation || !this.accommodation.images) {
@@ -294,22 +276,79 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     });
   }
 
+  /**
+   * Creates a mock file to be displayed in the dropzone
+   */
   private createMockFile(image) {
+    // Get reference to dropzone
     const dropzone = this.dropzoneComponent.directiveRef.dropzone();
 
-    const mockFile = { name: image.title, size: image.fileSize, dataURL: `${environment.apiUrl}images/${image.filename}`, uuid: image.uuid };
+    // Create the mock file
+    const mockFile = {
+      name: image.title,
+      size: image.fileSize,
+      dataURL: `${environment.apiUrl}images/${image.filename}`,
+      uuid: image.uuid
+    };
 
     // Call the default addedfile event handler
     dropzone.emit('addedfile', mockFile);
 
-    // Or if the file on your server is not yet in the right
-    // size, you can let Dropzone download and resize it
-    // callback and crossOrigin are optional.
+    // Create a thumbnail from the url
     dropzone.createThumbnailFromUrl(mockFile, dropzone.options.thumbnailWidth, dropzone.options.thumbnailHeight,
       dropzone.options.thumbnailMethod, true, (thumbnail) => {
         dropzone.emit('thumbnail', mockFile, thumbnail);
       }, 'anonymous');
 
     dropzone.emit('complete', mockFile);
+  }
+
+  /**
+   * Handles adding images to the queue.
+   * Shows an input alert for each image to enter a title
+   */
+  private handleAddedFiles() {
+    if (this.fileQueue.length === 0) {
+      // No files remaining
+      return;
+    }
+
+    if (this.alertService.isShown()) {
+      // We are already displaying the input alert
+      return;
+    }
+
+    const file = this.fileQueue[0];
+    const dropzone = this.dropzoneComponent.directiveRef.dropzone();
+
+    // Show a dialog to add the extra information
+    this.alertService.showInputAlert('Image Title', `Enter a title for this image: ${file.name}`, 'text').then((title) => {
+      // Change the preview element
+      $('[data-dz-name]', file.previewElement).text(title as string);
+
+      file.title = title;
+
+      // Add the item to the queue and upload
+      dropzone.enqueueFile(file);
+
+      // Remove it from our own queue
+      this.fileQueue.splice(this.fileQueue.findIndex((f) => f.upload.uuid === file.upload.uuid), 1);
+
+      // Using timeout else the alert might not be away yet.
+      setTimeout(() => {
+        this.handleAddedFiles();
+      }, 800);
+    }, () => {
+      // Remove the file since we do not have a title
+      dropzone.removeFile(file);
+
+      // Remove it from our own queue
+      this.fileQueue.splice(this.fileQueue.findIndex((f) => f.upload.uuid === file.upload.uuid), 1);
+
+      // Using timeout else the alert might not be away yet.
+      setTimeout(() => {
+        this.handleAddedFiles();
+      }, 800);
+    });
   }
 }
