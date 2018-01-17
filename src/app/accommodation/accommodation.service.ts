@@ -89,4 +89,14 @@ export class AccommodationService {
       .map(r => r.json())
       .arrayToTypescriptObject(Accommodation);
   }
+
+  /**
+   * Removes an image from the accommodation
+   * @param accommodationId The accommodation id to remove the image from
+   * @param imageId The id of the image
+   */
+  public removeImage(accommodationId: string, imageId: string) {
+    return this.authHttp.delete(`${environment.apiUrl}/accommodations/${accommodationId}/images/${imageId}`, HttpHelper.getRequestOptions())
+      .map(r => r.json());
+  }
 }

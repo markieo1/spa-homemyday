@@ -4,7 +4,7 @@
       Accommodations
     </h1>
     <button type="button" class="btn btn-success" routerLink="./edit/new">New Accommodation</button>
-    <div class="table-responsive" *ngIf="accommodations; else noAccommodationsTemplate">
+    <div class="table-responsive" *ngIf="accommodations && accommodations.length > 0; else noAccommodationsTemplate">
       <table class="table table-striped table-bordered table-hover">
         <thead>
           <tr>
