@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { environment } from '../../../environments/environment';
 import { DropzoneComponent } from 'ngx-dropzone-wrapper';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-accommodation-edit',
@@ -198,7 +199,7 @@ export class AccommodationEditComponent extends BaseComponent implements OnInit 
     // Show a dialog to add the extra information
     this.alertService.showInputAlert('Image Title', `Enter a title for this image: ${file.name}`, 'text').then((title) => {
       // Change the preview element
-      jQuery('[data-dz-name]', file.previewElement).text(title as string);
+      $('[data-dz-name]', file.previewElement).text(title as string);
 
       file.title = title;
       dropzone.enqueueFile(file);
