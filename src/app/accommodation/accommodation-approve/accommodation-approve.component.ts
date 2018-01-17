@@ -31,7 +31,7 @@ export class AccommodationApproveComponent extends BaseComponent implements OnIn
   * @param accommodation The accommodation
   */
   onReject(accommodation: Accommodation) {
-    this.alertService.showApprove()
+    this.alertService.showReject()
       .then((confirmed) => {
         if (confirmed) {
           const rejectedAccommodation = accommodation;
@@ -59,7 +59,6 @@ export class AccommodationApproveComponent extends BaseComponent implements OnIn
         if (confirmed) {
           const approvedAccommodation = accommodation;
           approvedAccommodation.approveStatus.status = ApproveStatus.Approved;
-          approvedAccommodation.approveStatus.reason = confirmed;
           this.subscription = this.accommodationService.updateApproval(approvedAccommodation)
             .subscribe((resp) => {
               const index = this.accommodations.findIndex(x => x.id === accommodation.id);
