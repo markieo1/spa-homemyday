@@ -2,14 +2,3 @@
 @import 'variables';
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap';
 @import '~font-awesome/scss/font-awesome';
-
-ui-carousel {
-  display: block;
-  position: relative;
-
-  ui-carousel-item {
-    img {
-      width: 100%;
-    }
-  }
-}
