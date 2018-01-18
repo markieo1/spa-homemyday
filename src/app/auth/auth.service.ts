@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
 import { Observable } from 'rxjs/Observable';
 import { HttpHelper } from '../shared/helpers/http.helper';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -11,7 +12,7 @@ import { IUserToken } from '../shared/interfaces/iusertoken.interface';
 export class AuthService {
   private loggedInEmitter: BehaviorSubject<boolean>;
 
-  constructor(protected http: Http) {
+  constructor(protected http: Http, protected authHttp: AuthHttp) {
     this.loggedInEmitter = new BehaviorSubject(this.isLoggedIn());
   }
 
@@ -89,6 +90,22 @@ export class AuthService {
         }
       })
       .do((loggedIn) => this.loggedInEmitter.next(loggedIn));
+  }
+
+  /**
+   * Changes the user's password.
+   * @param currentPassword The user's current password.
+   * @param newPassword The user's new desired password.
+   * @returns An Observable<boolean> indicating if the request was successful.
+   */
+  public changePassword(currentPassword, newPassword): Observable<boolean> {
+    return this.authHttp.post(`${environment.apiUrl}/authentication/changepassword`, {
+      oldPassword: currentPassword,
+      newPassword: newPassword
+    })
+    .map(response => {
+      return response.ok;
+    });
   }
 
   /**
