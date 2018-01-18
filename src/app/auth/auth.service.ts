@@ -92,13 +92,13 @@ export class AuthService {
       .do((loggedIn) => this.loggedInEmitter.next(loggedIn));
   }
 
-  public changePassword(currentPassword, newPassword) {
+  public changePassword(currentPassword, newPassword): Observable<boolean> {
     return this.authHttp.post(`${environment.apiUrl}/authentication/changepassword`, {
       oldPassword: currentPassword,
       newPassword: newPassword
     })
-    .subscribe(response => {
-      return true;
+    .map(response => {
+      return response.ok;
     });
   }
 
