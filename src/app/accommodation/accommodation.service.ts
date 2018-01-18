@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Headers, RequestOptionsArgs } from '@angular/http';
-import { Accommodation } from './accommodation.class';
+import { Accommodation, ApproveStatus } from './accommodation.class';
 import { HttpHelper } from '../shared/helpers/http.helper';
 import { AuthHttp } from 'angular2-jwt';
 import '../shared/operators/to-typescript-object.operator';
@@ -66,10 +66,15 @@ export class AccommodationService {
       .map(r => new Accommodation(r));
   }
 
-  public updateApproval(accommodation: Accommodation): Observable<Accommodation> {
-    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodation.id}/approval`, accommodation, HttpHelper.getRequestOptions())
-    .map(r => r.json())
-    .map(r => new Accommodation(r));
+  public updateApproval(accommodationId: string, status: ApproveStatus, reason?: string): Observable<Accommodation> {
+    const body = {
+      status,
+      reason
+    };
+
+    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodationId}/approval`, body, HttpHelper.getRequestOptions())
+      .map(r => r.json())
+      .map(r => new Accommodation(r));
   }
 
   /**
