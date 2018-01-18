@@ -28,7 +28,8 @@
             <td>
               <button type="button" class="btn btn-warning" (click)="onAccommodationDeleteClick(accommodation.id)">Delete</button>
               <button type="button" class="btn btn-secondary" [routerLink]="['./edit', accommodation.id]">Edit</button>
-              <button *ngIf="admin" type="button" (click)="onAccomodationRecommendedClick(accommodation)" class="btn btn-primary">Recommend</button>
+              <button *ngIf="admin && !accommodation.recommended" type="button" (click)="onAccomodationRecommendedClick(accommodation)" class="btn btn-primary">Recommend</button>
+              <button *ngIf="admin && accommodation.recommended" type="button" (click)="onAccomodationDoNotRecommendedClick(accommodation)" class="btn btn-primary">do not Recommend</button>
             </td>
           </tr>
         </tbody>

@@ -86,4 +86,21 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
       }
     });
   }
+
+  onAccomodationDoNotRecommendedClick(accommodation: Accommodation) {
+    this.alertService.showConfirm()
+    .then((response) => {
+      if (response) {
+        const recommendAccommodation = accommodation;
+        recommendAccommodation.recommended = false;
+
+        this.subscription = this.accommodationService.updateRecommend(recommendAccommodation)
+        .subscribe((resp) => {
+          this.alertService.showSuccess('Succesfully undo your change');
+        }, (error) => {
+            this.alertService.showError('Error occurred undo your changes');
+        });
+      }
+    });
+  }
 }
