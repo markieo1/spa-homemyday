@@ -3,6 +3,8 @@ import { Accommodation } from '../accommodation.class';
 import { BaseComponent } from '../../shared/base/basecomponent.class';
 import { AccommodationService } from '../accommodation.service';
 import { AlertService } from '../../alert/alert.service';
+import { AuthService } from '../../auth/auth.service';
+import { UserRoles } from '../../shared/enums/userroles.enum';
 
 @Component({
   selector: 'app-accommodation-overview',
@@ -14,16 +16,41 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
     */
   public accommodations: Accommodation[];
 
+  /**
+    * The accommodation object
+    */
+  public accommodation: Accommodation;
+
+  /**
+    * The admin property to check if user is admin
+    */
+  public admin: boolean;
+
   constructor(private accommodationService: AccommodationService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private authService: AuthService) {
     super();
+    const userInfo = authService.getUserInfo();
+
+    if (userInfo.role === UserRoles.Administrator) {
+      this.admin = true;
+    } else {
+      this.admin = false;
+    }
   }
 
   public ngOnInit() {
-    // Load all the accommodations
-    this.subscription = this.accommodationService.getForCurrentUser().subscribe(accommodations => {
-      this.accommodations = accommodations;
-    });
+    // Load all the accommodations if admin is logged in
+    // else load the accommodations from the current user
+    if (this.admin) {
+      this.subscription = this.accommodationService.getAll().subscribe(accommodations => {
+        this.accommodations = accommodations;
+      });
+    } else {
+      this.subscription = this.accommodationService.getForCurrentUser().subscribe(accommodations => {
+        this.accommodations = accommodations;
+      });
+    }
   }
 
   /**
@@ -44,5 +71,39 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
             });
         }
       });
+  }
+
+  onAccomodationRecommendedClick(accommodation: Accommodation) {
+    this.alertService.showConfirm()
+    .then((response) => {
+      if (response) {
+        accommodation.recommended = true;
+        const value = accommodation.recommended;
+
+        this.subscription = this.accommodationService.updateRecommend(accommodation.id, value)
+        .subscribe((resp) => {
+          this.alertService.showSuccess('Succesfully recommend accommodation');
+        }, (error) => {
+            this.alertService.showError('Error occurred while recommendad accomodation');
+        });
+      }
+    });
+  }
+
+  onAccomodationDoNotRecommendedClick(accommodation: Accommodation) {
+    this.alertService.showConfirm()
+    .then((response) => {
+      if (response) {
+        accommodation.recommended = false;
+        const value =  accommodation.recommended;
+
+        this.subscription = this.accommodationService.updateRecommend(accommodation.id, value)
+        .subscribe((resp) => {
+          this.alertService.showSuccess('Succesfully undo your change');
+        }, (error) => {
+            this.alertService.showError('Error occurred undo your changes');
+        });
+      }
+    });
   }
 }
