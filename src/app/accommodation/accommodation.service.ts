@@ -80,8 +80,9 @@ export class AccommodationService {
     * recommends an accommodation
     * @param accommodation The object of the accommodation
     */
-  public updateRecommend(accommodation: Accommodation): Observable<Accommodation> {
-    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodation.id}/recommendation`, accommodation, HttpHelper.getRequestOptions())
+  public updateRecommend(accommodationId: string): Observable<Accommodation> {
+
+    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodationId}/recommendation`, HttpHelper.getRequestOptions())
     .map(r => r.json())
     .map(r => new Accommodation(r));
   }

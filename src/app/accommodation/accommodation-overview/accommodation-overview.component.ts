@@ -80,7 +80,7 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
         const recommendAccommodation = accommodation;
         recommendAccommodation.recommended = true;
 
-        this.subscription = this.accommodationService.updateRecommend(recommendAccommodation)
+        this.subscription = this.accommodationService.updateRecommend(recommendAccommodation.id)
         .subscribe((resp) => {
           this.alertService.showSuccess('Succesfully recommend accommodation');
         }, (error) => {
