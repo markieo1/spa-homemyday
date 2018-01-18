@@ -78,6 +78,20 @@ export class AccommodationService {
   }
 
   /**
+    * recommends an accommodation
+    * @param accommodation The object of the accommodation
+    */
+  public updateRecommend(accommodationId: string, recommended: boolean): Observable<Accommodation> {
+    const body = {
+      recommended
+    };
+
+    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodationId}/recommendation`, body, HttpHelper.getRequestOptions())
+    .map(r => r.json())
+    .map(r => new Accommodation(r));
+  }
+
+  /**
     * Deletes an accommodation of the id
     * @param id The id of the accommodation
     */
