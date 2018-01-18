@@ -77,11 +77,10 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
     this.alertService.showConfirm()
     .then((response) => {
       if (response) {
-        const recommendAccommodation = accommodation;
-        recommendAccommodation.recommended = true;
-        const value = recommendAccommodation.recommended;
+        accommodation.recommended = true;
+        const value = accommodation.recommended;
 
-        this.subscription = this.accommodationService.updateRecommend(recommendAccommodation.id, value)
+        this.subscription = this.accommodationService.updateRecommend(accommodation.id, value)
         .subscribe((resp) => {
           this.alertService.showSuccess('Succesfully recommend accommodation');
         }, (error) => {
@@ -95,11 +94,10 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
     this.alertService.showConfirm()
     .then((response) => {
       if (response) {
-        const recommendAccommodation = accommodation;
-        recommendAccommodation.recommended = false;
-        const value =  recommendAccommodation.recommended;
+        accommodation.recommended = false;
+        const value =  accommodation.recommended;
 
-        this.subscription = this.accommodationService.updateRecommend(recommendAccommodation.id, value)
+        this.subscription = this.accommodationService.updateRecommend(accommodation.id, value)
         .subscribe((resp) => {
           this.alertService.showSuccess('Succesfully undo your change');
         }, (error) => {
