@@ -21,6 +21,9 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
     */
   public accommodation: Accommodation;
 
+  /**
+    * The admin property to check if user is admin
+    */
   public admin: boolean;
 
   constructor(private accommodationService: AccommodationService,
