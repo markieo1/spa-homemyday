@@ -2,8 +2,11 @@
   <div class="sidebar-nav navbar-collapse">
     <ul class="nav" id="side-menu">
       <li>
+          <a href="{{ homemydayUrl }}">
+            <i class="fa fa-home fa-fw"></i> HomeMyDay
+          </a>
         <a routerLink="/accommodations" routerLinkActive="active">
-          <i class="fa fa-home fa-fw"></i> Accommodations
+          <i class="fa fa-bed fa-fw"></i> Accommodations
         </a>
         <a routerLink="./accommodations/approve" *ngIf="admin">
           <i class="fa fa-check fa-fw"></i> Approve

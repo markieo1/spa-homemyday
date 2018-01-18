@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { UserRoles } from '../../shared/enums/userroles.enum';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-navigation-sidebar',
@@ -9,6 +10,7 @@ import { UserRoles } from '../../shared/enums/userroles.enum';
 export class SidebarComponent {
 
   public admin: boolean;
+  public homemydayUrl = environment.homeMyDayUrl;
 
   constructor(private authService: AuthService) {
     const userInfo = authService.getUserInfo();

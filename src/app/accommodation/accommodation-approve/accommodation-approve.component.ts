@@ -34,10 +34,7 @@ export class AccommodationApproveComponent extends BaseComponent implements OnIn
     this.alertService.showReject()
       .then((confirmed) => {
         if (confirmed) {
-          const rejectedAccommodation = accommodation;
-          rejectedAccommodation.approveStatus.status = ApproveStatus.Rejected;
-          rejectedAccommodation.approveStatus.reason = confirmed;
-          this.subscription = this.accommodationService.updateApproval(rejectedAccommodation)
+          this.subscription = this.accommodationService.updateApproval(accommodation.id, ApproveStatus.Rejected, confirmed)
             .subscribe((resp) => {
               const index = this.accommodations.findIndex(x => x.id === accommodation.id);
               this.accommodations.splice(index, 1);
@@ -59,7 +56,7 @@ export class AccommodationApproveComponent extends BaseComponent implements OnIn
         if (confirmed) {
           const approvedAccommodation = accommodation;
           approvedAccommodation.approveStatus.status = ApproveStatus.Approved;
-          this.subscription = this.accommodationService.updateApproval(approvedAccommodation)
+          this.subscription = this.accommodationService.updateApproval(accommodation.id, ApproveStatus.Approved)
             .subscribe((resp) => {
               const index = this.accommodations.findIndex(x => x.id === accommodation.id);
               this.accommodations.splice(index, 1);
