@@ -78,22 +78,15 @@ export class AccommodationService {
   }
 
   /**
-    * Approves an accommodation
-    * @param accommodation The object of the accommodation
-    */
-  public updateApproval(accommodation: Accommodation): Observable<Accommodation> {
-    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodation.id}/approval`, accommodation, HttpHelper.getRequestOptions())
-    .map(r => r.json())
-    .map(r => new Accommodation(r));
-  }
-
-  /**
     * recommends an accommodation
     * @param accommodation The object of the accommodation
     */
-  public updateRecommend(accommodationId: string): Observable<Accommodation> {
+  public updateRecommend(accommodationId: string, recommended: boolean): Observable<Accommodation> {
+    const body = {
+      recommended
+    };
 
-    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodationId}/recommendation`, HttpHelper.getRequestOptions())
+    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodationId}/recommendation`, body, HttpHelper.getRequestOptions())
     .map(r => r.json())
     .map(r => new Accommodation(r));
   }

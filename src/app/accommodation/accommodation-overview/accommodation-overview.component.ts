@@ -79,8 +79,9 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
       if (response) {
         const recommendAccommodation = accommodation;
         recommendAccommodation.recommended = true;
+        const value = recommendAccommodation.recommended;
 
-        this.subscription = this.accommodationService.updateRecommend(recommendAccommodation.id)
+        this.subscription = this.accommodationService.updateRecommend(recommendAccommodation.id, value)
         .subscribe((resp) => {
           this.alertService.showSuccess('Succesfully recommend accommodation');
         }, (error) => {
@@ -96,8 +97,9 @@ export class AccommodationOverviewComponent extends BaseComponent implements OnI
       if (response) {
         const recommendAccommodation = accommodation;
         recommendAccommodation.recommended = false;
+        const value =  recommendAccommodation.recommended;
 
-        this.subscription = this.accommodationService.updateRecommend(recommendAccommodation)
+        this.subscription = this.accommodationService.updateRecommend(recommendAccommodation.id, value)
         .subscribe((resp) => {
           this.alertService.showSuccess('Succesfully undo your change');
         }, (error) => {
