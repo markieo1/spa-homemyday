@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 export class SidebarComponent {
 
   public admin: boolean;
-  private homemydayUrl = environment.homeMyDayUrl;
+  public homemydayUrl = environment.homeMyDayUrl;
 
   constructor(private authService: AuthService) {
     const userInfo = authService.getUserInfo();
