@@ -10,6 +10,7 @@ import { Image } from '../../image/image.class';
 @Component({
   selector: 'app-accommodation-detail',
   templateUrl: 'accommodation-detail.component.html',
+  styleUrls: ['accommodation-detail.component.scss']
 })
 export class AccommodationDetailComponent extends BaseComponent implements OnInit {
   public accommodation: Accommodation;
