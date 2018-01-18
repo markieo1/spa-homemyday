@@ -8,8 +8,7 @@ import { equalValidator } from '../../shared/validator/equal.validator';
 
 @Component({
   selector: 'app-user-edit',
-  templateUrl: 'user-edit.component.html',
-  styles: []
+  templateUrl: 'user-edit.component.html'
 })
 export class UserEditComponent implements OnInit {
 
@@ -24,11 +23,16 @@ export class UserEditComponent implements OnInit {
   submitInProgress = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private alertService: AlertService, private router: Router) {
-    this.createForm();
   }
 
   ngOnInit() {
     this.user = this.authService.getUserInfo();
+
+    this.createForm();
+
+    if (!this.user) {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   /**

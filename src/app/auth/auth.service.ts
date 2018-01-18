@@ -92,6 +92,12 @@ export class AuthService {
       .do((loggedIn) => this.loggedInEmitter.next(loggedIn));
   }
 
+  /**
+   * Changes the user's password.
+   * @param currentPassword The user's current password.
+   * @param newPassword The user's new desired password.
+   * @returns An Observable<boolean> indicating if the request was successful.
+   */
   public changePassword(currentPassword, newPassword): Observable<boolean> {
     return this.authHttp.post(`${environment.apiUrl}/authentication/changepassword`, {
       oldPassword: currentPassword,
