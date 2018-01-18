@@ -11,6 +11,7 @@ const routes: Routes = [
   {
     path: 'accommodations', component: AccommodationComponent, children: [
       { path: '', component: AccommodationOverviewComponent },
+      { path: 'recommend', component: AccommodationOverviewComponent},
       { path: 'approve', component: AccommodationApproveComponent },
       { path: ':id', component: AccommodationDetailComponent },
       { path: 'edit/:accommodationId', component: AccommodationEditComponent },

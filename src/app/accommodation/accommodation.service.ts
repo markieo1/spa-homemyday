@@ -66,6 +66,18 @@ export class AccommodationService {
       .map(r => new Accommodation(r));
   }
 
+  public updateApproval(accommodation: Accommodation): Observable<Accommodation> {
+    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodation.id}/approval`, accommodation, HttpHelper.getRequestOptions())
+    .map(r => r.json())
+    .map(r => new Accommodation(r));
+  }
+
+  public updateRecommend(accommodation: Accommodation): Observable<Accommodation> {
+    return this.authHttp.put(`${environment.apiUrl}/accommodations/${accommodation.id}/recommendation`, accommodation, HttpHelper.getRequestOptions())
+    .map(r => r.json())
+    .map(r => new Accommodation(r));
+  }
+
   /**
     * Deletes an accommodation of the id
     * @param id The id of the accommodation
