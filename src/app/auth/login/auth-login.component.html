@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="login-panel panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Login</h3>
+        </div>
+        <div class="panel-body">
+          <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <fieldset>
+              <div class="form-group">
+                <input class="form-control" placeholder="E-mail" name="email" type="email" [(ngModel)]="loginModel.email" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" placeholder="Password" name="password" type="password" [(ngModel)]="loginModel.password" required>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="!f.valid && loading">Login</button>
+              </div>
+
+              <div class="form-group">
+                <p class="text-center">
+                  <span>or
+                    <a routerLink="/register">Register</a>
+                  </span>
+                </p>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

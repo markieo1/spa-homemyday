@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="page-header">
+      {{ isNew ? 'Create' : 'Edit' }} {{ isNew ? 'Accommodation' : accommodation.name }}
+    </h1>
+    <form [formGroup]="accommodationForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input label="Name" class="form-control" formControlName="name" type="text" [(ngModel)]="accommodation.name">
+      </div>
+      <div class="form-group">
+        <label for="Description">Description:</label>
+        <textarea class="form-control" rows="5" formControlName="description" [(ngModel)]="accommodation.description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="maxPerson">Max Persons:</label>
+        <input type="number" class="form-control" formControlName="maxPersons" [(ngModel)]="accommodation.maxPersons">
+      </div>
+      <div class="form-group">
+        <label for="continent">Continent:</label>
+        <input type="text" class="form-control" formControlName="continent" [(ngModel)]="accommodation.continent">
+      </div>
+      <div class="form-group">
+        <label for="country">Country:</label>
+        <input type="text" class="form-control" formControlName="country" [(ngModel)]="accommodation.country">
+      </div>
+      <div class="form-group">
+        <label for="location">Location:</label>
+        <input type="text" class="form-control" formControlName="location" [(ngModel)]="accommodation.location">
+      </div>
+      <div class="form-group">
+        <label for="latitude">Latitude:</label>
+        <input type="text" class="form-control" formControlName="latitude" [(ngModel)]="accommodation.latitude">
+      </div>
+      <div class="form-group">
+        <label for="longitude">Longitude:</label>
+        <input type="text" class="form-control" formControlName="longitude" [(ngModel)]="accommodation.longitude">
+      </div>
+      <div class="form-group">
+        <label for="rooms">Rooms:</label>
+        <input type="number" class="form-control" formControlName="rooms" [(ngModel)]="accommodation.rooms">
+      </div>
+      <div class="form-group">
+        <label for="beds">Beds:</label>
+        <input type="number" class="form-control" formControlName="beds" [(ngModel)]="accommodation.beds">
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" class="form-control" formControlName="price" [(ngModel)]="accommodation.price">
+      </div>
+      <div class="form-group">
+        <label for="spaceText">Space:</label>
+        <textarea type="text" class="form-control" formControlName="spaceText" [(ngModel)]="accommodation.spaceText"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="servicesText">Service:</label>
+        <textarea type="text" class="form-control" formControlName="servicesText" [(ngModel)]="accommodation.servicesText"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="pricesText">Price Text:</label>
+        <textarea type="text" class="form-control" formControlName="pricesText" [(ngModel)]="accommodation.pricesText"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="rulesText">Rules:</label>
+        <textarea type="text" class="form-control" formControlName="rulesText" [(ngModel)]="accommodation.rulesText"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="cancellationText">Cancellation:</label>
+        <textarea type="text" class="form-control" formControlName="cancellationText" [(ngModel)]="accommodation.cancellationText"></textarea>
+      </div>
+      <dropzone *ngIf="!isNew" [disabled]="isNew" [config]="dropzoneConfig" (error)="onUploadError($event)" (removedFile)="onRemoveFile($event)"
+        (addedFile)="onAddFile($event)" (sending)="onSendingFile($event)" (success)="onSuccess($event)"></dropzone>
+      <button type="submit" class="btn btn-success" [disabled]="!accommodationForm.valid || submitInProgress">Save</button>
+      <button type="button" class="btn btn-danger" routerLink="../../">Cancel</button>
+    </form>
+  </div>
+</div>
