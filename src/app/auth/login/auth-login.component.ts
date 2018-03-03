@@ -11,13 +11,16 @@ import { AlertService } from '../../alert/alert.service';
   templateUrl: './auth-login.component.html'
 })
 export class AuthLoginComponent extends BaseComponent {
-
   public loading = false;
   public loginModel: LoginModel;
 
   private form: NgForm;
 
-  constructor(private alertService: AlertService, private authService: AuthService, private router: Router) {
+  constructor(
+    private alertService: AlertService,
+    private authService: AuthService,
+    private router: Router
+  ) {
     super();
     this.loginModel = new LoginModel();
   }
@@ -25,16 +28,26 @@ export class AuthLoginComponent extends BaseComponent {
   onSubmit(form: NgForm) {
     this.loading = true;
 
-    this.subscription = this.authService.login(this.loginModel.email, this.loginModel.password)
-      .subscribe((loggedin) => {
-        this.loading = false;
+    this.subscription = this.authService
+      .login(
+        this.loginModel.email,
+        this.loginModel.password,
+        this.loginModel.otpToken
+      )
+      .subscribe(
+        loggedin => {
+          this.loading = false;
 
-        this.alertService.showSuccess('Successfully logged in.');
-        this.router.navigateByUrl('/');
-      }, error => {
-        this.loading = false;
+          this.alertService.showSuccess('Successfully logged in.');
+          this.router.navigateByUrl('/');
+        },
+        error => {
+          this.loading = false;
 
-        this.alertService.showError('An error has occurred while trying to login.');
-      });
+          this.alertService.showError(
+            'An error has occurred while trying to login.'
+          );
+        }
+      );
   }
 }

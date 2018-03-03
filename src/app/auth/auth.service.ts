@@ -17,23 +17,23 @@ export class AuthService {
   }
 
   /**
-  * Checks if the user is logged in
-  */
+   * Checks if the user is logged in
+   */
   isLoggedIn(): boolean {
     return tokenNotExpired();
   }
 
   /**
-  * returns a new BehaviorSubject
-  */
+   * returns a new BehaviorSubject
+   */
   loggedIn(): Observable<boolean> {
     return this.loggedInEmitter;
   }
 
   /**
-  * Get the user info of the currently logged in user.
-  * @returns The user info of the currently logged in user, as an instance of IUserToken.
-  */
+   * Get the user info of the currently logged in user.
+   * @returns The user info of the currently logged in user, as an instance of IUserToken.
+   */
   public getUserInfo(): IUserToken {
     if (!this.isLoggedIn()) {
       return null;
@@ -47,12 +47,16 @@ export class AuthService {
   }
 
   /**
-      * Registers the user with the API
-      * @param email The email of the user
-      * @param password The password
-      * @param confirmPassword The confirm password
-  */
-  public register(email: string, password: string, confirmPassword: string): Observable<any> {
+   * Registers the user with the API
+   * @param email The email of the user
+   * @param password The password
+   * @param confirmPassword The confirm password
+   */
+  public register(
+    email: string,
+    password: string,
+    confirmPassword: string
+  ): Observable<any> {
     if (!email || !password || !confirmPassword) {
       return Observable.throw(new Error('Invalid data supplied!'));
     }
@@ -62,24 +66,35 @@ export class AuthService {
       return Observable.throw(new Error('Passwords do not match!'));
     }
 
-    return this.http.post(`${environment.apiUrl}/authentication/register`, {
-      email,
-      password
-    }, HttpHelper.getRequestOptions())
+    return this.http
+      .post(
+        `${environment.apiUrl}/authentication/register`,
+        {
+          email,
+          password
+        },
+        HttpHelper.getRequestOptions()
+      )
       .map(r => r.status === 201);
   }
 
-
   /**
-      * logs the user in with the API
-      * @param email The email of the user
-      * @param password The password
-  */
-  public login(email: string, password: string): Observable<boolean> {
-    return this.http.post(`${environment.apiUrl}/authentication/login`, {
-      email: email,
-      password: password
-    })
+   * logs the user in with the API
+   * @param email The email of the user
+   * @param password The password
+   * @param otpToken The otp token
+   */
+  public login(
+    email: string,
+    password: string,
+    otpToken: string
+  ): Observable<boolean> {
+    return this.http
+      .post(`${environment.apiUrl}/authentication/login`, {
+        email,
+        password,
+        token: otpToken
+      })
       .map(response => {
         const responseToken = response.json().token;
         if (responseToken) {
@@ -89,7 +104,7 @@ export class AuthService {
           return false;
         }
       })
-      .do((loggedIn) => this.loggedInEmitter.next(loggedIn));
+      .do(loggedIn => this.loggedInEmitter.next(loggedIn));
   }
 
   /**
@@ -99,18 +114,19 @@ export class AuthService {
    * @returns An Observable<boolean> indicating if the request was successful.
    */
   public changePassword(currentPassword, newPassword): Observable<boolean> {
-    return this.authHttp.post(`${environment.apiUrl}/authentication/changepassword`, {
-      oldPassword: currentPassword,
-      newPassword: newPassword
-    })
-    .map(response => {
-      return response.ok;
-    });
+    return this.authHttp
+      .post(`${environment.apiUrl}/authentication/changepassword`, {
+        oldPassword: currentPassword,
+        newPassword: newPassword
+      })
+      .map(response => {
+        return response.ok;
+      });
   }
 
   /**
-  * Removed user token and logout user.
-  */
+   * Removed user token and logout user.
+   */
   logout() {
     localStorage.removeItem('token');
     this.loggedInEmitter.next(false);

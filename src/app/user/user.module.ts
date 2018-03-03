@@ -4,17 +4,19 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertModule } from '../alert/alert.module';
 import { AuthModule } from '../auth/auth.module';
-import { AuthService } from '../auth/auth.service';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
+import { TwofactorService } from './twofactor.service';
+import { OtpComponent } from './otp/otp.component';
 
 @NgModule({
   declarations: [
-  UserComponent,
-  UserDetailsComponent,
-  UserEditComponent
+    UserComponent,
+    UserDetailsComponent,
+    UserEditComponent,
+    OtpComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +26,7 @@ import { UserComponent } from './user.component';
     AlertModule,
     UserRoutingModule
   ],
-  providers: [
-      AuthService
-  ],
+  providers: [TwofactorService],
   exports: []
 })
-export class UserModule { }
+export class UserModule {}
